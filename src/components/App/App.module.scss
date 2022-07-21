@@ -9,6 +9,7 @@ body {
   grid-template-columns: 0.2fr 0.45fr;
   display: grid;
   grid-gap: 2em;
+  justify-content: center;
   max-width: 1010px;
   margin: 0 auto;
   min-width: 320px;
@@ -16,4 +17,8 @@ body {
   position: relative;
   padding: 0 36px;
   background-color: #fff;
+}
+.content {
+  display: grid;
+  justify-content: start
 }

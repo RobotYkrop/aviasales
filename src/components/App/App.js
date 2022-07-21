@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className={classes.container}>
       <Filter />
-      <section>
+      <section className={classes['content']}>
         <Header />
         <AviaList />
       </section>
