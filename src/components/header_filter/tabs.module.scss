@@ -1,23 +1,22 @@
 .tabs {
   display: flex;
-  align-items: flex-start;
   border-radius: 10px;
-}
-.tabs_items {
-  padding: 1em;
-  background: #ffffff;
-  border: 1px solid #dfe5ec;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #4a4a4a;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 20px;
-}
-.tabs_items:hover {
-  color: #ffffff;
-  background: #2196f3;
+  &_items {
+    padding: 1em;
+    background: #ffffff;
+    border: 1px solid #dfe5ec;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    &:hover {
+      color: #ffffff;
+      background: #2196f3;
+    }
+  }
 }

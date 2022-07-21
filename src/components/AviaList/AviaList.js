@@ -1,9 +1,10 @@
 import AviaItem from '../AviaItem/AviaItem';
-import filters from '../Filter/Filter.module.scss';
+
+import list from './AviaList.module.scss';
 
 const AviaList = () => {
   return (
-    <ul className={filters.list_filter}>
+    <ul className={list.list_ticket}>
       <AviaItem />
     </ul>
   );
