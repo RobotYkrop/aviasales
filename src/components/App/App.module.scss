@@ -1,0 +1,19 @@
+body {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+}
+.container {
+  grid-template-columns: 0.2fr 0.45fr;
+  display: grid;
+  grid-gap: 2em;
+  max-width: 1010px;
+  margin: 0 auto;
+  min-width: 320px;
+  height: auto;
+  position: relative;
+  padding: 0 36px;
+  background-color: #fff;
+}

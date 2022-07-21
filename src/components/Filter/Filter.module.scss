@@ -20,6 +20,7 @@ $color: #4a4a4a;
   align-items: center;
   user-select: none;
 }
+
 .custom-checkbox + label::before {
   content: '';
   display: inline-block;
@@ -27,8 +28,8 @@ $color: #4a4a4a;
   height: 1em;
   flex-shrink: 0;
   flex-grow: 0;
-  border: 1px solid #adb5bd;
-  border-radius: 0.25em;
+  border: 1px solid #2196f3;
+  border-radius: 2px;
   margin-right: 0.5em;
   background-repeat: no-repeat;
   background-position: center center;
@@ -60,19 +61,29 @@ $color: #4a4a4a;
 .custom-checkbox:disabled + label::before {
   background-color: #e9ecef;
 }
-
+.list_filter {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.list_item {
+  padding: 0.5em 1em;
+}
+.list-item:hover {
+  background: #f1fcff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 .filters {
   display: block;
   border-radius: 3px;
   background: #fff;
-  padding: 1em 1em 1em 1em;
   text-decoration: none;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  .form-filters {
+  .form {
     display: grid;
   }
-  .filter-title {
-    margin-top: 0;
+  .title {
+    padding: 0.5em 1em;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;

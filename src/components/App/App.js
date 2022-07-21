@@ -1,9 +1,17 @@
+import AviaList from '../AviaList/AviaList';
 import Filter from '../Filter/Filter';
+import Header from '../header_filter/tabs';
+
+import classes from './App.module.scss';
 
 const App = () => {
   return (
-    <div>
+    <div className={classes.container}>
       <Filter />
+      <section>
+        <Header />
+        <AviaList />
+      </section>
     </div>
   );
 };

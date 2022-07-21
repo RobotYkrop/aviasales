@@ -1,0 +1,24 @@
+.list_avia_ticket {
+  display: grid;
+  grid-template-areas:
+    'price .    logo'
+    'city  wait transfer';
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.avia_logo {
+  grid-area: logo;
+}
+.avia_price {
+  grid-area: price;
+}
+.avia_city_time {
+  grid-area: city;
+}
+.avia_wait {
+  grid-area: wait;
+}
+.avia-transfer {
+  grid-area: transfer;
+}
