@@ -1,6 +1,6 @@
 import AviaList from '../AviaList/AviaList';
 import Filter from '../Filter/Filter';
-import Header from '../header_filter/tabs';
+import Header from '../tabs/tabs';
 
 import classes from './App.module.scss';
 
