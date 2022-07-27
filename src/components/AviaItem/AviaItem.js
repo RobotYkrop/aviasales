@@ -1,49 +1,37 @@
+import { convertDate, getTravelTime } from '../utilites/convertDate';
+import { groupNums } from '../utilites/priceNum';
+
 import items from './AviaItems.module.scss';
 
-const AviaItem = () => {
+const AviaItem = ({ price, carrier, segments }) => {
+  const textPrice = groupNums(price);
   return (
-    <section>
-      <ul className={items.list_avia_ticket}>
-        <div></div>
-        <li className={items['avia_price']}>
-          <span>13 000 Р</span>
-        </li>
-        <li className={items['avia_logo']}>
-          <span>Лого</span>
-        </li>
-        <div className={items['avia_city_time']}>
-          <li>
-            <span>MOW-HKT</span>
-            <span>10:45-08:00</span>
-          </li>
-          <li>
-            <span>MOW-HKT</span>
-            <span>10:45-08:00</span>
-          </li>
-        </div>
-        <div className={items['avia_wait']}>
-          <li>
-            <span>В пути</span>
-            <span>10:45-08:00</span>
-          </li>
-          <li>
-            <span>В пути</span>
-            <span>10:45-08:00</span>
-          </li>
-        </div>
-        <div className={items['avia_transfer']}>
-          <li>
-            <span>2 пересадки</span>
-            <span>HKG, JNB</span>
-          </li>
-          <li>
-            <span>1 пересадка</span>
-            <span>hkg</span>
-          </li>
-        </div>
-      </ul>
-    </section>
+    <ul className={items['list_avia_ticket']}>
+      <div></div>
+      <li className={items['avia_price']}>{textPrice} р</li>
+      <img className={items['avia_logo']} alt="logo" src={`//pics.avs.io/99/36/${carrier}.png`} />
+      {segments.map((item) => {
+        const { date, origin, duration } = item;
+        let CONVERT_DATE = convertDate(date);
+        let CONVERT_TRAVEL_TIME = getTravelTime(duration);
+        return (
+          <div className={items['segments']} key={item.date}>
+            <li className={items['avia_city_time']}>
+              <span>{origin}</span>
+              <span>{CONVERT_DATE}</span>
+            </li>
+            <li className={items['avia_wait']}>
+              <span>В пути</span>
+              <span>{CONVERT_TRAVEL_TIME}</span>
+            </li>
+            <li className={items['avia_transfer']}>
+              <span>2 пересадки</span>
+              <span>HKG, JNB</span>
+            </li>
+          </div>
+        );
+      })}
+    </ul>
   );
 };
-
 export default AviaItem;

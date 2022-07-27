@@ -8,6 +8,7 @@ body {
 .container {
   grid-template-columns: 0.2fr 0.45fr;
   display: grid;
+  align-items: start;
   grid-gap: 2em;
   justify-content: center;
   max-width: 1010px;
@@ -20,5 +21,6 @@ body {
 }
 .content {
   display: grid;
-  justify-content: start
+  grid-gap: 1em;
+  justify-content: start;
 }

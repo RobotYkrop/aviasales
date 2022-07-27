@@ -1,9 +1,9 @@
 const defaultState = {
-  allTicket: false,
-  noTransfer: false,
-  oneTransfer: false,
-  twoTransfer: false,
-  threeTransfer: false,
+  allTicket: true,
+  noTransfer: true,
+  oneTransfer: true,
+  twoTransfer: true,
+  threeTransfer: true,
 };
 
 export const filterReducer = (state = defaultState, action) => {

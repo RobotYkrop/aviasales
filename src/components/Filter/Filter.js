@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 import * as action from '../../store/actions';
 import * as store from '../../store/store';
@@ -17,9 +17,9 @@ const Filter = () => {
 
   useEffect(() => {
     if (noTransfer && oneTransfer && twoTransfer && threeTransfer) {
-      dispatch({ type: 'ticketTrue' });
+      action.ticketTrue(dispatch);
     } else {
-      dispatch({ type: 'ticketFalse' });
+      action.ticketFalse(dispatch);
     }
   }, [noTransfer, oneTransfer, twoTransfer, threeTransfer]);
   return (
