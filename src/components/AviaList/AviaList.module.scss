@@ -1,7 +1,21 @@
+@import '../variables';
+
 .list_ticket {
   padding: 0;
   margin: 0;
   display: grid;
   grid-gap: 1em;
   list-style-type: none;
+  & .showMoreTicket {
+    background: $border-color;
+    color: white;
+    border-radius: 5px;
+    padding: 1em;
+    letter-spacing: 0.5px;
+    border: 0;
+    text-transform: uppercase;
+    &:hover {
+      background: $border-color_light-blue;
+    }
+  }
 }

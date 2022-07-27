@@ -1,22 +1,24 @@
+@import '../variables';
+
 .tabs {
   display: flex;
   border-radius: 10px;
   &_items {
     padding: 1em;
-    background: #ffffff;
+    background: white;
     border: 1px solid #dfe5ec;
     display: flex;
     align-items: center;
     text-align: center;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #4a4a4a;
+    color: $color;
     font-weight: 600;
     font-size: 12px;
     line-height: 20px;
     &:hover {
-      color: #ffffff;
-      background: #2196f3;
+      color: white;
+      background: $backgroung-color_light;
     }
   }
 }

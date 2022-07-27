@@ -26,8 +26,8 @@ const AviaList = () => {
         );
       })}
       {listTickets.length >= numShowTicket && (
-        <button type="button" onClick={() => dispatch(showMoreTicket())}>
-          ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!
+        <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
+          Показать еще 5 билетов!
         </button>
       )}
     </ul>

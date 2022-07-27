@@ -12,9 +12,9 @@ export const fetchSearchId = () => {
       try {
         const res = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${arr.searchId}`);
         console.log(res);
-        const tt = await res.json();
-        console.log(tt);
-        return dispatch(tickets(tt));
+        const json = await res.json();
+        console.log(json);
+        return dispatch(tickets(json));
       } catch (err) {
         return Error(err);
       }
