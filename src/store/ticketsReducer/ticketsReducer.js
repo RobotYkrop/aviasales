@@ -8,7 +8,7 @@ export const ticketsReducer = (state = defaultState, action) => {
     case 'LIST_TICKETS':
       return {
         ...state,
-        tickets: [...action.payload.tickets],
+        tickets: [...action.payload.tickets.slice(0, state.numShowTicket)],
       };
     case 'CURRENT_TICKETS':
       return { ...state, numShowTicket: state.numShowTicket + 5 };

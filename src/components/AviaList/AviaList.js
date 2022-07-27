@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Spin } from 'antd';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import uuid from 'react-uuid';
 
@@ -13,25 +13,30 @@ const AviaList = () => {
   const listTickets = useSelector((state) => state.ticketsReducer.tickets);
   const numShowTicket = useSelector((state) => state.ticketsReducer.numShowTicket);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchSearchId());
-  }, []);
-  return (
-    <ul className={list['list_ticket']}>
-      {listTickets.slice(0, numShowTicket).map((item) => {
-        return (
-          <li key={uuid()}>
-            <AviaItem {...item} />
-          </li>
-        );
-      })}
-      {listTickets.length >= numShowTicket && (
-        <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
-          Показать еще 5 билетов!
-        </button>
-      )}
-    </ul>
-  );
+  // useEffect(() => {
+  //   dispatch(fetchSearchId());
+  // }, []);
+  if (listTickets.length === 0) {
+    return <Spin tip="Loading..." />;
+  } else {
+    return (
+      <div className={list['list_ticket']}>
+        {listTickets.slice(0, numShowTicket).map((item) => {
+          return <AviaItem {...item} key={uuid()} />;
+        })}
+        {(listTickets.length >= numShowTicket &&
+          ((
+            <button
+              type="button"
+              className={list['showMoreTicket']}
+              onClick={() => dispatch(showMoreTicket(), dispatch(fetchSearchId()))}
+            >
+              Показать еще 5 билетов!
+            </button>
+          ) ?? <Spin tip="Loading..." />)) || <Spin tip="Loading..." />}
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state) => {

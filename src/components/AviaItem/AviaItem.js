@@ -1,3 +1,5 @@
+import uuid from 'react-uuid';
+
 import { convertDate, getTravelTime } from '../utilites/convertDate';
 import { groupNums } from '../utilites/priceNum';
 
@@ -9,13 +11,13 @@ const AviaItem = ({ price, carrier, segments }) => {
     <ul className={items['list_avia_ticket']}>
       <div></div>
       <li className={items['avia_price']}>{textPrice} р</li>
-      <img className={items['avia_logo']} alt="logo" src={`//pics.avs.io/99/36/${carrier}.png`} />
+      <img className={items['avia_logo']} alt={carrier} src={`//pics.avs.io/99/36/${carrier}.png`} />
       {segments.map((item) => {
         const { date, origin, duration } = item;
         let CONVERT_DATE = convertDate(date);
         let CONVERT_TRAVEL_TIME = getTravelTime(duration);
         return (
-          <div className={items['segments']} key={item.date}>
+          <div className={items['segments']} key={uuid()}>
             <li className={items['avia_city_time']}>
               <span>{origin}</span>
               <span>{CONVERT_DATE}</span>

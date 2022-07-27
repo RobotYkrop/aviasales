@@ -2,6 +2,7 @@ import AviaList from '../AviaList/AviaList';
 import Filter from '../Filter/Filter';
 import Header from '../tabs/tabs';
 
+import 'antd/dist/antd.min.css';
 import classes from './App.module.scss';
 
 const App = () => {
