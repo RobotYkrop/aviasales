@@ -23,11 +23,11 @@ const AviaItem = ({ price, carrier, segments }) => {
               <span>{CONVERT_DATE}</span>
             </li>
             <li className={items['avia_wait']}>
-              <span>В пути</span>
+              <span>В ПУТИ</span>
               <span>{CONVERT_TRAVEL_TIME}</span>
             </li>
             <li className={items['avia_transfer']}>
-              <span>2 пересадки</span>
+              <span>2 ПЕРЕСАДКИ</span>
               <span>HKG, JNB</span>
             </li>
           </div>

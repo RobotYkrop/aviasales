@@ -8,5 +8,5 @@ export const convertDate = (date) => {
 export const getTravelTime = (duration) => {
   const hours = Math.trunc(duration / 60);
   const min = duration % 60;
-  return `${hours < 10 ? `0${hours}` : hours}:${min < 10 ? `0${min}` : min}`;
+  return `${hours < 10 ? `0${hours}` : hours}ч ${min < 10 ? `0${min}` : min}м`;
 };

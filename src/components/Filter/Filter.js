@@ -9,11 +9,11 @@ import classes from './Filter.module.scss';
 const Filter = () => {
   const dispatch = useDispatch();
 
-  const noTransfer = useSelector((state) => state.filterReducer.noTransfer);
-  const oneTransfer = useSelector((state) => state.filterReducer.oneTransfer);
-  const twoTransfer = useSelector((state) => state.filterReducer.twoTransfer);
-  const threeTransfer = useSelector((state) => state.filterReducer.threeTransfer);
-  const allTicket = useSelector((state) => state.filterReducer.allTicket);
+  const noTransfer = useSelector((state) => state.ticketsReducer.noTransfer);
+  const oneTransfer = useSelector((state) => state.ticketsReducer.oneTransfer);
+  const twoTransfer = useSelector((state) => state.ticketsReducer.twoTransfer);
+  const threeTransfer = useSelector((state) => state.ticketsReducer.threeTransfer);
+  const allTicket = useSelector((state) => state.ticketsReducer.allTicket);
 
   useEffect(() => {
     if (noTransfer && oneTransfer && twoTransfer && threeTransfer) {
@@ -99,7 +99,7 @@ const Filter = () => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.ticketsReducer;
 };
 
 export default connect(mapStateToProps, store)(Filter);

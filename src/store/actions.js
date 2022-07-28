@@ -9,3 +9,7 @@ export const ticketFalse = (payload) => payload({ type: 'ticketFalse', payload }
 // Actions для массива билетов
 export const tickets = (payload) => ({ type: 'LIST_TICKETS', payload });
 export const showMoreTicket = (payload) => ({ type: 'CURRENT_TICKETS', payload });
+// Actions для сортировки\
+export const lowPrice = (payload) => ({ type: 'LOW_PRICE_CASE', payload });
+export const speedAvia = (payload) => ({ type: 'SPEED_AVIA_CASE', payload });
+export const optimale = (payload) => ({ type: 'OPTIMAL', payload });
