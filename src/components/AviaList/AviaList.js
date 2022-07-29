@@ -1,67 +1,51 @@
 import { Spin } from 'antd';
-import { useEffect, useState } from 'react';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import uuid from 'react-uuid';
 
 import { showMoreTicket } from '../../store/actions';
+import { fetchSearchId } from '../AviaApi/AviaApi';
 import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
 
 import list from './AviaList.module.scss';
 
+const getNumOfStop = (ticket) =>
+  ticket.segments
+    .map((element) => element.stops.length)
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+const filterTicketByTransfer = (ticket, showAllTickets, valueFilterTransfer) => {
+  if (!showAllTickets) {
+    return valueFilterTransfer.includes(getNumOfStop(ticket));
+  }
+  return true;
+};
+
 const AviaList = () => {
   const listTickets = useSelector((state) => state.ticketsReducer.tickets);
   const numShowTicket = useSelector((state) => state.ticketsReducer.numShowTicket);
-  const [searchId, setSearchId] = useState();
-  const [tickets, setTickets] = useState([]);
-  console.log(listTickets);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    fetch('https://aviasales-test-api.kata.academy/search')
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setSearchId(res.searchId);
-      });
-  }, []);
-  useEffect(() => {
-    if (searchId) {
-      const subscribe = async () => {
-        let res = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
-        if (res.status === 502 || res.status === 500) {
-          await subscribe();
-        } else if (res.status !== 200) {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          await subscribe();
-        } else {
-          let part = await res.json();
-          console.log(part);
-          setTickets([...tickets, part]);
-          console.log(tickets);
-          if (!part.stop) {
-            await subscribe();
-          } else {
-            console.log(tickets);
-          }
-        }
-      };
-      subscribe();
-    }
-  }, [searchId]);
+  const listStops = useSelector((state) => state.ticketsReducer.stop);
+  const showAllTickets = useSelector((state) => state.ticketsReducer.showAllTickets);
+  const valueFilterTransfer = useSelector((state) => state.ticketsReducer.arrFilter);
 
-  if (listTickets.length === 0) {
+  const ticketsFilter = listTickets.filter((item) => filterTicketByTransfer(item, showAllTickets, valueFilterTransfer));
+  const loader = listStops === false ? <Spin tip="Loading..." /> : false;
+  const dispatch = useDispatch();
+  dispatch(fetchSearchId());
+  if (ticketsFilter.length === 0 && valueFilterTransfer === []) {
     return <Spin tip="Loading..." />;
   } else {
     return (
       <div className={list['list_ticket']}>
-        {listTickets.slice(0, numShowTicket).map((item) => {
+        {loader}
+        {ticketsFilter.slice(0, numShowTicket).map((item) => {
           return <AviaItem {...item} key={uuid()} />;
         })}
-        {(listTickets.length >= numShowTicket && (
+        {ticketsFilter.length >= numShowTicket && (
           <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
             Показать еще 5 билетов!
           </button>
-        )) || <Spin tip="Loading..." />}
+        )}
       </div>
     );
   }

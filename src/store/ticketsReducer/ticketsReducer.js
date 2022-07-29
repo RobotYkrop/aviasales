@@ -1,21 +1,30 @@
-import { mapDuration } from '../../components/utilites/priceNum';
+import { mapDuration } from '../../components/utilites/convertNum';
 
 export const defaultState = {
   tickets: [],
+  arrFilter: [],
   numShowTicket: 5,
+  stop: false,
+  showAllTickets: true,
   allTicket: true,
   noTransfer: true,
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
 };
-// Хотел разделить редьюсер, но не получается стейт редьюсера с билетами соединить с другими стейтами других редьюсеров
+console.log(defaultState.filterValue);
+// Хотел разделить редьюсер, но не получается стейт редьюсера соединить с другими стейтами других редьюсеров
 export const ticketsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'LIST_TICKETS':
       return {
         ...state,
         tickets: [...state.tickets, ...action.payload.tickets],
+      };
+    case 'LIST_STOPS':
+      return {
+        ...state,
+        stop: action.payload,
       };
     case 'CURRENT_TICKETS':
       return { ...state, numShowTicket: state.numShowTicket + 5 };
@@ -48,17 +57,42 @@ export const ticketsReducer = (state = defaultState, action) => {
         threeTransfer: !state.allTicket,
       };
     case 'noTransfersCase':
-      return { ...state, noTransfer: !state.noTransfer };
+      console.log(state.arrFilter);
+      return {
+        ...state,
+        noTransfer: !state.noTransfer,
+      };
     case 'oneTransfersCase':
-      return { ...state, oneTransfer: !state.oneTransfer };
+      console.log(state.filterValue);
+      return {
+        ...state,
+        oneTransfer: !state.oneTransfer,
+      };
     case 'twoTransfersCase':
-      return { ...state, twoTransfer: !state.twoTransfer };
+      console.log(state.filterValue);
+      return {
+        ...state,
+        twoTransfer: !state.twoTransfer,
+      };
     case 'threeTransfersCase':
-      return { ...state, threeTransfer: !state.threeTransfer };
+      console.log(state.filterValue);
+      return {
+        ...state,
+        threeTransfer: !state.threeTransfer,
+      };
     case 'ticketTrue':
       return { ...state, allTicket: true };
     case 'ticketFalse':
       return { ...state, allTicket: false };
+    case 'Filter':
+      if (action.payload.isChecked) {
+        return { ...state, arrFilter: [...state.arrFilter, state.arrFilter.push(action.payload.filterValue)] };
+      } else {
+        console.log(state.arrFilter);
+        return { ...state, arrFilter: [...state.arrFilter.filter((item) => item !== action.payload.filterValue)] };
+      }
+    case 'switchFilterAll':
+      return { ...state, showAllTickets: action.payload };
     default:
       return state;
   }

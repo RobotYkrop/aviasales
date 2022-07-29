@@ -16,6 +16,26 @@ const Filter = () => {
   const allTicket = useSelector((state) => state.ticketsReducer.allTicket);
 
   useEffect(() => {
+    dispatch(action.switchFilterAll(allTicket));
+  }, [dispatch, allTicket]);
+
+  useEffect(() => {
+    dispatch(action.filter({ isChecked: noTransfer, filterValue: 1 }));
+  }, [noTransfer, dispatch]);
+
+  useEffect(() => {
+    dispatch(action.filter({ isChecked: oneTransfer, filterValue: 2 }));
+  }, [oneTransfer, dispatch]);
+
+  useEffect(() => {
+    dispatch(action.filter({ isChecked: twoTransfer, filterValue: 3 }));
+  }, [twoTransfer, dispatch]);
+
+  useEffect(() => {
+    dispatch(action.filter({ isChecked: threeTransfer, filterValue: 4 }));
+  }, [threeTransfer, dispatch]);
+
+  useEffect(() => {
     if (noTransfer && oneTransfer && twoTransfer && threeTransfer) {
       action.ticketTrue(dispatch);
     } else {
