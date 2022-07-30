@@ -8,7 +8,15 @@ export const groupNums = (function () {
 export const mapDuration = (ticket) =>
   ticket.segments.map((element) => element.duration).reduce((prevValue, curValue) => prevValue + curValue, 0);
 
-export const declOfNum = (number, titles) => {
-  let cases = [2, 0, 1, 1, 1, 2];
-  return titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[number % 10 < 5 ? number % 10 : 5]];
+export const enumerate = (val) => {
+  switch (val) {
+    case 1:
+      return 'ПЕРЕСАДКА';
+    case 2:
+    case 3:
+    case 4:
+      return 'ПЕРЕСАДКИ';
+    default:
+      return 'БЕЗ ПЕРЕСАДОК';
+  }
 };

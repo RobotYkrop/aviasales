@@ -1,7 +1,7 @@
 import uuid from 'react-uuid';
 
 import { convertDate, getTravelTime } from '../utilites/convertDate';
-import { groupNums, declOfNum } from '../utilites/convertNum';
+import { groupNums, enumerate } from '../utilites/convertNum';
 
 import items from './AviaItems.module.scss';
 
@@ -17,7 +17,7 @@ const AviaItem = ({ price, carrier, segments }) => {
         const { date, origin, duration, stops } = item;
         let CONVERT_DATE = convertDate(date);
         let CONVERT_TRAVEL_TIME = getTravelTime(duration);
-        let stop = declOfNum(stops.length, ['ПЕРЕСАДКА', 'ПЕРЕСАДКИ', 'ПЕРЕСАДОК']);
+        let stop = enumerate(stops.length);
         return (
           <ul className={items['segments']} key={uuid()}>
             <li className={items['text']}>{origin}</li>
