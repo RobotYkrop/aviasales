@@ -1,19 +1,49 @@
 @import '../variables';
 
+.text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #a0b0b9;
+}
+.time-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  color: #4a4a4a;
+}
+
 .list_avia_ticket {
-  display: grid;
-  grid-template-areas:
-    'price .    logo'
-    'city  wait transfer';
   list-style-type: none;
   padding: 1.5em;
-  margin: 0;
   border-radius: 3px;
   background: white;
   text-decoration: none;
   filter: $box-shadow;
+  & .price_logo {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    margin-bottom: 8px;
+  }
+  & .segments {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   & .avia_logo {
-    grid-area: logo;
+    margin-left: auto;
+    object-fit: cover;
+    width: calc((100vw - 320px) / 2);
+    max-width: 99px;
+    min-width: 60px;
   }
   & .avia_price {
     margin-top: auto;
@@ -21,18 +51,5 @@
     font-size: 22px;
     font-weight: bold;
     color: $border-color;
-    grid-area: price;
-  }
-  & .avia_city_time {
-    grid-area: city;
-  }
-  & .avia_wait {
-    grid-area: wait;
-  }
-  & .avia-transfer {
-    grid-area: transfer;
-  }
-  & span {
-    display: grid;
   }
 }

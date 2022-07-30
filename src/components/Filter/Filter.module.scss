@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .text-style {
   font-family: 'Open Sans';
@@ -61,7 +61,6 @@
   background-color: $backgroung-color_light;
 }
 .filters {
-  display: block;
   border-radius: 3px;
   background: #fff;
   text-decoration: none;
@@ -71,16 +70,12 @@
     padding: 0;
     margin: 0;
   }
-  & .form {
-    display: grid;
-  }
   & .title {
-    padding: 0.5em;
+    padding: 0.5em 1em;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 12px;
     letter-spacing: 0.5px;
-    color: $color;
     text-transform: uppercase;
   }
   &-item {

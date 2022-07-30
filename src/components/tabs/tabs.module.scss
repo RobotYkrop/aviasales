@@ -2,22 +2,9 @@
 
 .tabs {
   display: flex;
+  border-radius: 5px;
   &_items {
-    padding: 1em;
-    background: white;
-    border: 1px solid #dfe5ec;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.5px;
+    padding: 0;
     text-transform: uppercase;
-    color: $color;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 20px;
-    &:hover {
-      color: white;
-      background: $backgroung-color_light;
-    }
   }
 }

@@ -5,14 +5,12 @@ export const defaultState = {
   arrFilter: [],
   numShowTicket: 5,
   stop: false,
-  showAllTickets: true,
   allTicket: true,
   noTransfer: true,
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
 };
-console.log(defaultState.filterValue);
 // Хотел разделить редьюсер, но не получается стейт редьюсера соединить с другими стейтами других редьюсеров
 export const ticketsReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -57,25 +55,21 @@ export const ticketsReducer = (state = defaultState, action) => {
         threeTransfer: !state.allTicket,
       };
     case 'noTransfersCase':
-      console.log(state.arrFilter);
       return {
         ...state,
         noTransfer: !state.noTransfer,
       };
     case 'oneTransfersCase':
-      console.log(state.filterValue);
       return {
         ...state,
         oneTransfer: !state.oneTransfer,
       };
     case 'twoTransfersCase':
-      console.log(state.filterValue);
       return {
         ...state,
         twoTransfer: !state.twoTransfer,
       };
     case 'threeTransfersCase':
-      console.log(state.filterValue);
       return {
         ...state,
         threeTransfer: !state.threeTransfer,
@@ -84,15 +78,6 @@ export const ticketsReducer = (state = defaultState, action) => {
       return { ...state, allTicket: true };
     case 'ticketFalse':
       return { ...state, allTicket: false };
-    case 'Filter':
-      if (action.payload.isChecked) {
-        return { ...state, arrFilter: [...state.arrFilter, state.arrFilter.push(action.payload.filterValue)] };
-      } else {
-        console.log(state.arrFilter);
-        return { ...state, arrFilter: [...state.arrFilter.filter((item) => item !== action.payload.filterValue)] };
-      }
-    case 'switchFilterAll':
-      return { ...state, showAllTickets: action.payload };
     default:
       return state;
   }

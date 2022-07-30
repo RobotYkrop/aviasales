@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import uuid from 'react-uuid';
+import { useCallback } from 'react';
 
 import { showMoreTicket } from '../../store/actions';
 import { fetchSearchId } from '../AviaApi/AviaApi';
@@ -9,39 +10,50 @@ import AviaItem from '../AviaItem/AviaItem';
 
 import list from './AviaList.module.scss';
 
-const getNumOfStop = (ticket) =>
-  ticket.segments
-    .map((element) => element.stops.length)
-    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-
-const filterTicketByTransfer = (ticket, showAllTickets, valueFilterTransfer) => {
-  if (!showAllTickets) {
-    return valueFilterTransfer.includes(getNumOfStop(ticket));
-  }
-  return true;
-};
-
 const AviaList = () => {
-  const listTickets = useSelector((state) => state.ticketsReducer.tickets);
-  const numShowTicket = useSelector((state) => state.ticketsReducer.numShowTicket);
-  const listStops = useSelector((state) => state.ticketsReducer.stop);
-  const showAllTickets = useSelector((state) => state.ticketsReducer.showAllTickets);
-  const valueFilterTransfer = useSelector((state) => state.ticketsReducer.arrFilter);
+  const [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer, listTickets, numShowTicket, listStops] =
+    useSelector((state) => [
+      state.ticketsReducer.allTicket,
+      state.ticketsReducer.noTransfer,
+      state.ticketsReducer.oneTransfer,
+      state.ticketsReducer.twoTransfer,
+      state.ticketsReducer.threeTransfer,
+      state.ticketsReducer.tickets,
+      state.ticketsReducer.numShowTicket,
+      state.ticketsReducer.stop,
+    ]);
 
-  const ticketsFilter = listTickets.filter((item) => filterTicketByTransfer(item, showAllTickets, valueFilterTransfer));
+  const filtered = useCallback((arrTicket) => {
+    return arrTicket.filter((currentValue) => {
+      if (allTicket) {
+        return currentValue;
+      }
+      if (
+        (noTransfer && currentValue.segments[0].stops.length === 0 && currentValue.segments[1].stops.length === 0) ||
+        (oneTransfer && currentValue.segments[0].stops.length === 1 && currentValue.segments[1].stops.length === 1) ||
+        (twoTransfer && currentValue.segments[0].stops.length === 2 && currentValue.segments[1].stops.length === 2) ||
+        (threeTransfer && currentValue.segments[0].stops.length === 3 && currentValue.segments[1].stops.length === 3)
+      )
+        return true;
+      return false;
+    });
+  });
+
+  const arr = filtered(listTickets);
+
   const loader = listStops === false ? <Spin tip="Loading..." /> : false;
   const dispatch = useDispatch();
   dispatch(fetchSearchId());
-  if (ticketsFilter.length === 0 && valueFilterTransfer === []) {
+  if (arr.length === 0) {
     return <Spin tip="Loading..." />;
   } else {
     return (
       <div className={list['list_ticket']}>
         {loader}
-        {ticketsFilter.slice(0, numShowTicket).map((item) => {
+        {arr.slice(0, numShowTicket).map((item) => {
           return <AviaItem {...item} key={uuid()} />;
         })}
-        {ticketsFilter.length >= numShowTicket && (
+        {arr.length >= numShowTicket && (
           <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
             Показать еще 5 билетов!
           </button>

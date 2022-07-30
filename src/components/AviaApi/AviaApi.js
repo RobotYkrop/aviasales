@@ -5,11 +5,15 @@ import { stop, tickets } from '../../store/actions';
 export const fetchSearchId = () => async (dispatch) => {
   const [searchId, setSearchId] = useState();
   useEffect(() => {
-    fetch('https://aviasales-test-api.kata.academy/search')
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchId(res.searchId);
-      });
+    try {
+      fetch('https://aviasales-test-api.kata.academy/search')
+        .then((res) => res.json())
+        .then((res) => {
+          setSearchId(res.searchId);
+        });
+    } catch (e) {
+      throw new Error(e.message);
+    }
   }, []);
   useEffect(() => {
     if (searchId) {

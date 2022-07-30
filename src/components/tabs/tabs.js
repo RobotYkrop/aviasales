@@ -1,4 +1,5 @@
 import { useDispatch, connect } from 'react-redux';
+import { Button } from 'antd';
 
 import { lowPrice, optimale, speedAvia } from '../../store/actions';
 import { store } from '../../store/store';
@@ -9,15 +10,15 @@ const Header = () => {
   const dispatch = useDispatch();
   return (
     <section className={tabs.tabs}>
-      <button onClick={() => dispatch(lowPrice())} className={tabs['tabs_items']}>
+      <Button size="large" type="primary" onClick={() => dispatch(lowPrice())} className={tabs['tabs_items']}>
         Самый дешевый
-      </button>
-      <button onClick={() => dispatch(speedAvia())} className={tabs['tabs_items']}>
+      </Button>
+      <Button size="large" type="primary" onClick={() => dispatch(speedAvia())} className={tabs['tabs_items']}>
         Самый быстрый
-      </button>
-      <button onClick={() => dispatch(optimale())} className={tabs['tabs_items']}>
+      </Button>
+      <Button size="large" type="primary" onClick={() => dispatch(optimale())} className={tabs['tabs_items']}>
         Оптимальный
-      </button>
+      </Button>
     </section>
   );
 };

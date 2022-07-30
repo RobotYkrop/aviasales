@@ -9,38 +9,18 @@ import classes from './Filter.module.scss';
 const Filter = () => {
   const dispatch = useDispatch();
 
-  const noTransfer = useSelector((state) => state.ticketsReducer.noTransfer);
-  const oneTransfer = useSelector((state) => state.ticketsReducer.oneTransfer);
-  const twoTransfer = useSelector((state) => state.ticketsReducer.twoTransfer);
-  const threeTransfer = useSelector((state) => state.ticketsReducer.threeTransfer);
-  const allTicket = useSelector((state) => state.ticketsReducer.allTicket);
+  const [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer] = useSelector((state) => [
+    state.ticketsReducer.allTicket,
+    state.ticketsReducer.noTransfer,
+    state.ticketsReducer.oneTransfer,
+    state.ticketsReducer.twoTransfer,
+    state.ticketsReducer.threeTransfer,
+  ]);
 
   useEffect(() => {
-    dispatch(action.switchFilterAll(allTicket));
-  }, [dispatch, allTicket]);
-
-  useEffect(() => {
-    dispatch(action.filter({ isChecked: noTransfer, filterValue: 1 }));
-  }, [noTransfer, dispatch]);
-
-  useEffect(() => {
-    dispatch(action.filter({ isChecked: oneTransfer, filterValue: 2 }));
-  }, [oneTransfer, dispatch]);
-
-  useEffect(() => {
-    dispatch(action.filter({ isChecked: twoTransfer, filterValue: 3 }));
-  }, [twoTransfer, dispatch]);
-
-  useEffect(() => {
-    dispatch(action.filter({ isChecked: threeTransfer, filterValue: 4 }));
-  }, [threeTransfer, dispatch]);
-
-  useEffect(() => {
-    if (noTransfer && oneTransfer && twoTransfer && threeTransfer) {
-      action.ticketTrue(dispatch);
-    } else {
-      action.ticketFalse(dispatch);
-    }
+    noTransfer && oneTransfer && twoTransfer && threeTransfer
+      ? dispatch(action.ticketTrue(allTicket))
+      : dispatch(action.ticketFalse(allTicket));
   }, [noTransfer, oneTransfer, twoTransfer, threeTransfer]);
   return (
     <section className={classes.filters}>
@@ -49,7 +29,7 @@ const Filter = () => {
         <ul className={classes['list_filter']}>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => action.allTick(dispatch)}
+              onChange={() => dispatch(action.allTick(allTicket))}
               checked={allTicket}
               id="all"
               name="all"
@@ -62,7 +42,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => action.noTran(dispatch)}
+              onChange={() => dispatch(action.noTran(noTransfer))}
               checked={noTransfer}
               id="no-transfers"
               name="noTransfers"
@@ -75,7 +55,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => action.oneTran(dispatch)}
+              onChange={() => dispatch(action.oneTran(oneTransfer))}
               checked={oneTransfer}
               id="1-transfers"
               name="oneTransfers"
@@ -88,7 +68,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => action.twoTran(dispatch)}
+              onChange={() => dispatch(action.twoTran(twoTransfer))}
               checked={twoTransfer}
               id="2-transfers"
               name="twoTransfers"
@@ -101,7 +81,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => action.threeTran(dispatch)}
+              onChange={() => dispatch(action.threeTran(threeTransfer))}
               checked={threeTransfer}
               id="3-transfers"
               name="threeTransfers"
