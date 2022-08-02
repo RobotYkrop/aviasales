@@ -10,13 +10,13 @@ const Header = () => {
   const dispatch = useDispatch();
   return (
     <section className={tabs.tabs}>
-      <Button size="large" type="primary" onClick={() => dispatch(lowPrice())} className={tabs['tabs_items']}>
+      <Button size="large" type="default" onClick={() => dispatch(lowPrice())} className={tabs['items']}>
         Самый дешевый
       </Button>
-      <Button size="large" type="primary" onClick={() => dispatch(speedAvia())} className={tabs['tabs_items']}>
+      <Button size="large" type="default" onClick={() => dispatch(speedAvia())} className={tabs['items']}>
         Самый быстрый
       </Button>
-      <Button size="large" type="primary" onClick={() => dispatch(optimale())} className={tabs['tabs_items']}>
+      <Button size="large" type="default" onClick={() => dispatch(optimale())} className={tabs['items']}>
         Оптимальный
       </Button>
     </section>

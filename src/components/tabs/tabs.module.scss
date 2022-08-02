@@ -2,9 +2,10 @@
 
 .tabs {
   display: flex;
-  border-radius: 5px;
-  &_items {
-    padding: 0;
+  & .items {
     text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
   }
 }

@@ -1,9 +1,9 @@
 import { Spin } from 'antd';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import uuid from 'react-uuid';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import { showMoreTicket } from '../../store/actions';
+import { lowPrice, showMoreTicket } from '../../store/actions';
 import { fetchSearchId } from '../AviaApi/AviaApi';
 import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
@@ -40,6 +40,12 @@ const AviaList = () => {
   });
 
   const arr = filtered(listTickets);
+
+  useEffect(() => {
+    if (arr.length !== 0) {
+      dispatch(lowPrice());
+    }
+  }, []);
 
   const loader = listStops === false ? <Spin tip="Loading..." /> : false;
   const dispatch = useDispatch();
