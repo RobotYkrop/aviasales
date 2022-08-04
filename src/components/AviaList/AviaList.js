@@ -1,9 +1,9 @@
-import { Spin } from 'antd';
+import { Spin, Alert } from 'antd';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import uuid from 'react-uuid';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
-import { lowPrice, showMoreTicket } from '../../store/actions';
+import { showMoreTicket } from '../../store/actions';
 import { fetchSearchId } from '../AviaApi/AviaApi';
 import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
@@ -11,18 +11,27 @@ import AviaItem from '../AviaItem/AviaItem';
 import list from './AviaList.module.scss';
 
 const AviaList = () => {
-  const [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer, listTickets, numShowTicket, listStops] =
-    useSelector((state) => [
-      state.ticketsReducer.allTicket,
-      state.ticketsReducer.noTransfer,
-      state.ticketsReducer.oneTransfer,
-      state.ticketsReducer.twoTransfer,
-      state.ticketsReducer.threeTransfer,
-      state.ticketsReducer.tickets,
-      state.ticketsReducer.numShowTicket,
-      state.ticketsReducer.stop,
-    ]);
-
+  const [
+    isError,
+    allTicket,
+    noTransfer,
+    oneTransfer,
+    twoTransfer,
+    threeTransfer,
+    listTickets,
+    numShowTicket,
+    listStops,
+  ] = useSelector((state) => [
+    state.ticketsReducer.isError,
+    state.ticketsReducer.allTicket,
+    state.ticketsReducer.noTransfer,
+    state.ticketsReducer.oneTransfer,
+    state.ticketsReducer.twoTransfer,
+    state.ticketsReducer.threeTransfer,
+    state.ticketsReducer.tickets,
+    state.ticketsReducer.numShowTicket,
+    state.ticketsReducer.stop,
+  ]);
   const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
       if (allTicket) {
@@ -41,21 +50,14 @@ const AviaList = () => {
 
   const arr = filtered(listTickets);
 
-  useEffect(() => {
-    if (arr.length !== 0) {
-      dispatch(lowPrice());
-    }
-  }, []);
-
-  const loader = listStops === false ? <Spin tip="Loading..." /> : false;
+  // const loader = listStops === false ? <Spin tip="Loading..." /> : false;
   const dispatch = useDispatch();
   dispatch(fetchSearchId());
-  if (arr.length === 0) {
-    return <Spin tip="Loading..." />;
-  } else {
-    return (
+  return (
+    <div>
+      {!listStops && !isError && <Spin tip="Loading..." />}
+      {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
       <div className={list['list_ticket']}>
-        {loader}
         {arr.slice(0, numShowTicket).map((item) => {
           return <AviaItem {...item} key={uuid()} />;
         })}
@@ -65,8 +67,8 @@ const AviaList = () => {
           </button>
         )}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {

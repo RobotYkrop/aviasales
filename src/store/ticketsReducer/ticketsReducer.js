@@ -4,6 +4,7 @@ export const defaultState = {
   tickets: [],
   arrFilter: [],
   numShowTicket: 5,
+  isError: false,
   stop: false,
   allTicket: true,
   noTransfer: true,
@@ -45,7 +46,7 @@ export const ticketsReducer = (state = defaultState, action) => {
           ),
         ],
       };
-    case 'allTicketCase':
+    case 'ALL_TRANSFERS_CASE':
       return {
         ...state,
         allTicket: !state.allTicket,
@@ -54,30 +55,32 @@ export const ticketsReducer = (state = defaultState, action) => {
         twoTransfer: !state.allTicket,
         threeTransfer: !state.allTicket,
       };
-    case 'noTransfersCase':
+    case 'NO_TRANSFERS_CASE':
       return {
         ...state,
         noTransfer: !state.noTransfer,
       };
-    case 'oneTransfersCase':
+    case 'ONE_TRANSFERS_CASE':
       return {
         ...state,
         oneTransfer: !state.oneTransfer,
       };
-    case 'twoTransfersCase':
+    case 'TWO_TRANSFERS_CASE':
       return {
         ...state,
         twoTransfer: !state.twoTransfer,
       };
-    case 'threeTransfersCase':
+    case 'THREE_TRANSFERS_CASE':
       return {
         ...state,
         threeTransfer: !state.threeTransfer,
       };
-    case 'ticketTrue':
+    case 'ALL_TICKET_TRUE':
       return { ...state, allTicket: true };
-    case 'ticketFalse':
+    case 'ALL_TICKET_FALSE':
       return { ...state, allTicket: false };
+    case 'SET_ERROR':
+      return { ...state, isError: action.payload };
     default:
       return state;
   }

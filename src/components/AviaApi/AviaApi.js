@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { stop, tickets } from '../../store/actions';
+import { setError, stop, tickets } from '../../store/actions';
 
 export const fetchSearchId = () => async (dispatch) => {
   const [searchId, setSearchId] = useState();
@@ -23,8 +23,7 @@ export const fetchSearchId = () => async (dispatch) => {
           if (res.status === 502 || res.status === 500) {
             await subscribe();
           } else if (res.status !== 200) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            await subscribe();
+            dispatch(setError(true));
           } else {
             let part = await res.json();
             dispatch(tickets(part));
