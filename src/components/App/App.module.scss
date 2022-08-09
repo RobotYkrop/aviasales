@@ -1,10 +1,18 @@
+body {
+  background-color: #f3f7fa;
+}
+
+.App {
+  background: #f3f7fa;
+}
+
 .container {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  grid-template-columns: 0.5fr .5fr;
+  grid-template-columns: 0.5fr 0.5fr;
   display: grid;
   align-items: start;
   grid-gap: 2em;
@@ -15,7 +23,6 @@
   height: auto;
   position: relative;
   padding: 0 36px;
-  background-color: white;
 }
 .content {
   display: grid;

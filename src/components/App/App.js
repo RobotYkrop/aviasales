@@ -27,12 +27,14 @@ const App = () => {
       <AviaList />
     );
   return (
-    <div className={classes.container}>
-      <Filter />
-      <section className={classes['content']}>
-        <Header />
-        {notFound}
-      </section>
+    <div className={classes.App}>
+      <div className={classes['container']}>
+        <Filter />
+        <section className={classes['content']}>
+          <Header />
+          {notFound}
+        </section>
+      </div>
     </div>
   );
 };
