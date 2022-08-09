@@ -55,7 +55,11 @@ const AviaList = () => {
   dispatch(fetchSearchId());
   return (
     <div>
-      {!listStops && !isError && <Spin tip="Loading..." />}
+      {!listStops && !isError && (
+        <div className={list['loader']}>
+          <Spin tip="Loading..." />
+        </div>
+      )}
       {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
       <div className={list['list_ticket']}>
         {arr.slice(0, numShowTicket).map((item) => {
