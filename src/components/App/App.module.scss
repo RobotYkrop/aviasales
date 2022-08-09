@@ -4,6 +4,10 @@ body {
 
 .App {
   background: #f3f7fa;
+  display: grid;
+  justify-items: center;
+  margin-top: 2em;
+  gap: 2em;
 }
 
 .container {
@@ -12,7 +16,7 @@ body {
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-columns: 0.65fr 0.5fr;
   display: grid;
   align-items: start;
   grid-gap: 2em;

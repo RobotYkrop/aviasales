@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import AviaList from '../AviaList/AviaList';
 import Filter from '../Filter/Filter';
 import Header from '../tabs/tabs';
+import logo from '../assets/Logo.svg';
 
 import 'antd/dist/antd.min.css';
 import classes from './App.module.scss';
@@ -28,6 +29,7 @@ const App = () => {
     );
   return (
     <div className={classes.App}>
+      <img src={logo} />
       <div className={classes['container']}>
         <Filter />
         <section className={classes['content']}>
