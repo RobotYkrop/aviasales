@@ -14,13 +14,15 @@ const AviaItem = ({ price, carrier, segments }) => {
         <img className={items['avia_logo']} alt={carrier} src={`//pics.avs.io/99/36/${carrier}.png`} />
       </div>
       {segments.map((item) => {
-        const { date, origin, duration, stops } = item;
+        const { date, origin, duration, stops, destination } = item;
         let CONVERT_DATE = convertDate(date);
         let CONVERT_TRAVEL_TIME = getTravelTime(duration);
         let stop = enumerate(stops.length);
         return (
           <ul className={items['segments']} key={uuid()}>
-            <li className={items['text']}>{origin}</li>
+            <li className={items['text']}>
+              {origin} - {destination}
+            </li>
             <li className={items['text']}>В ПУТИ</li>
             <li className={items['text']}>{stop}</li>
             <li className={items['time-text']}>{CONVERT_DATE}</li>

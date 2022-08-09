@@ -32,6 +32,7 @@ const AviaList = () => {
     state.ticketsReducer.numShowTicket,
     state.ticketsReducer.stop,
   ]);
+  console.log(listTickets);
   const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
       if (allTicket) {
