@@ -1,5 +1,3 @@
-import { mapDuration } from '../../components/utilites/convertNum';
-
 export const defaultState = {
   tickets: [],
   arrFilter: [],
@@ -11,6 +9,9 @@ export const defaultState = {
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
+  sortPrice: true,
+  sortOptimal: false,
+  sortSpeed: false,
 };
 // Хотел разделить редьюсер, но не получается стейт редьюсера соединить с другими стейтами других редьюсеров
 export const ticketsReducer = (state = defaultState, action) => {
@@ -30,21 +31,30 @@ export const ticketsReducer = (state = defaultState, action) => {
     case 'LOW_PRICE_CASE':
       return {
         ...state,
-        tickets: [...state.tickets.sort((prev, next) => (prev.price > next.price ? 1 : -1))],
+        sortPrice: !state.sortPrice,
+        sortSpeed: false,
+        sortOptimal: false,
+        // tickets: [...state.tickets.sort((prev, next) => (prev.price > next.price ? 1 : -1))],
       };
     case 'SPEED_AVIA_CASE':
       return {
         ...state,
-        tickets: [...state.tickets.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1))],
+        sortSpeed: !state.sortSpeed,
+        sortPrice: false,
+        sortOptimal: false,
+        // tickets: [...state.tickets.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1))],
       };
     case 'OPTIMAL':
       return {
         ...state,
-        tickets: [
-          ...state.tickets.sort((prev, next) =>
-            mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1
-          ),
-        ],
+        sortOptimal: !state.sortOptimal,
+        sortSpeed: false,
+        sortPrice: false,
+        // tickets: [
+        //   ...state.tickets.sort((prev, next) =>
+        //     mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1
+        //   ),
+        // ],
       };
     case 'ALL_TRANSFERS_CASE':
       return {

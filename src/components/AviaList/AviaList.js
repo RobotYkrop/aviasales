@@ -7,10 +7,12 @@ import { showMoreTicket } from '../../store/actions';
 import { fetchSearchId } from '../AviaApi/AviaApi';
 import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
+import { mapDuration } from '../utilites/convertNum';
 
 import list from './AviaList.module.scss';
 
 const AviaList = () => {
+  const dispatch = useDispatch();
   const [
     isError,
     allTicket,
@@ -21,6 +23,9 @@ const AviaList = () => {
     listTickets,
     numShowTicket,
     listStops,
+    sortPrice,
+    sortSpeed,
+    sortOptimal,
   ] = useSelector((state) => [
     state.ticketsReducer.isError,
     state.ticketsReducer.allTicket,
@@ -31,9 +36,34 @@ const AviaList = () => {
     state.ticketsReducer.tickets,
     state.ticketsReducer.numShowTicket,
     state.ticketsReducer.stop,
+    state.ticketsReducer.sortPrice,
+    state.ticketsReducer.sortSpeed,
+    state.ticketsReducer.sortOptimal,
   ]);
   console.log(listTickets);
-  const filtered = useCallback((arrTicket) => {
+  const filteredAndSorted = useCallback((arrTicket) => {
+    // Сделал сортировку по дефолту, но если не надо ее, то могу убрать
+    // switch (listTickets) {
+    //   case sortPrice:
+    //     listTickets.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+    //     break;
+    //   case sortSpeed:
+    //     listTickets.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+    //     break;
+    //   case sortOptimal:
+    //     listTickets.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+    //     break;
+
+    //   default:
+    //     break;
+    // }
+    if (sortPrice) {
+      return arrTicket.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+    } else if (sortSpeed) {
+      return arrTicket.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+    } else if (sortOptimal) {
+      return arrTicket.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+    }
     return arrTicket.filter((currentValue) => {
       if (allTicket) {
         return currentValue;
@@ -49,10 +79,8 @@ const AviaList = () => {
     });
   });
 
-  const arr = filtered(listTickets);
+  const arr = filteredAndSorted(listTickets);
 
-  // const loader = listStops === false ? <Spin tip="Loading..." /> : false;
-  const dispatch = useDispatch();
   dispatch(fetchSearchId());
   return (
     <div>

@@ -2,6 +2,10 @@
 
 .tabs {
   display: flex;
+  & .active {
+    background-color: #2196f3;
+    color: #ffffff;
+  }
   & button {
     color: #4a4a4a;
     display: flex;
@@ -9,14 +13,10 @@
     justify-content: center;
     border: 1px solid #dfe5ec;
     padding: 2em;
-    &:active {
-      background-color: #2196f3;
-      color: #ffffff;
-    }
-    &:focus {
-      background-color: #2196f3;
-      color: #ffffff;
-    }
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
   }
   & button:first-child {
     border-top-left-radius: 5px;
@@ -27,11 +27,5 @@
     border-left: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
-  & .items {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 20px;
   }
 }
