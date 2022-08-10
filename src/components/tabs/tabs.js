@@ -1,5 +1,4 @@
 import { useDispatch, connect, useSelector } from 'react-redux';
-import { Button } from 'antd';
 
 import { lowPrice, optimale, speedAvia } from '../../store/actions';
 import { store } from '../../store/store';
@@ -15,29 +14,15 @@ const Header = () => {
   const dispatch = useDispatch();
   return (
     <section className={tabs.tabs}>
-      <Button
-        size="large"
-        onClick={() => dispatch(lowPrice(sortPrice))}
-        className={sortPrice ? tabs['active'] : tabs['']}
-      >
+      <button onClick={() => dispatch(lowPrice(sortPrice))} className={sortPrice ? tabs['active'] : tabs['']}>
         Самый дешевый
-      </Button>
-      <Button
-        size="large"
-        type="default"
-        onClick={() => dispatch(speedAvia(sortSpeed))}
-        className={sortSpeed ? tabs['active'] : tabs['']}
-      >
+      </button>
+      <button onClick={() => dispatch(speedAvia(sortSpeed))} className={sortSpeed ? tabs['active'] : tabs['']}>
         Самый быстрый
-      </Button>
-      <Button
-        size="large"
-        type="default"
-        onClick={() => dispatch(optimale(sortOptimal))}
-        className={sortOptimal ? tabs['active'] : tabs['']}
-      >
+      </button>
+      <button onClick={() => dispatch(optimale(sortOptimal))} className={sortOptimal ? tabs['active'] : tabs['']}>
         Оптимальный
-      </Button>
+      </button>
     </section>
   );
 };
