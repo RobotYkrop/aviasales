@@ -13,13 +13,18 @@ export const defaultState = {
   sortOptimal: false,
   sortSpeed: false,
 };
-// Хотел разделить редьюсер, но не получается стейт редьюсера соединить с другими стейтами других редьюсеров
+
 export const ticketsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'LIST_TICKETS':
       return {
         ...state,
         tickets: [...state.tickets, ...action.payload.tickets],
+      };
+    case 'FILTER_TICKETS':
+      return {
+        ...state,
+        arrFilter: [...state.tickets],
       };
     case 'LIST_STOPS':
       return {

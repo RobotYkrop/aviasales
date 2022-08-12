@@ -1,16 +1,15 @@
 import uuid from 'react-uuid';
 
 import { convertDate, getTravelTime } from '../utilites/convertDate';
-import { groupNums, enumerate } from '../utilites/convertNum';
+import { enumerate } from '../utilites/convertNum';
 
 import items from './AviaItems.module.scss';
 
 const AviaItem = ({ price, carrier, segments }) => {
-  const textPrice = groupNums(price);
   return (
     <ul className={items['list_avia_ticket']}>
       <div className={items['price_logo']}>
-        <li className={items['avia_price']}>{textPrice} р</li>
+        <li className={items['avia_price']}>{price.toLocaleString()} р</li>
         <img className={items['avia_logo']} alt={carrier} src={`//pics.avs.io/99/36/${carrier}.png`} />
       </div>
       {segments.map((item) => {

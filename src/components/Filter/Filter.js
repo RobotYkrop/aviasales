@@ -42,7 +42,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => dispatch(action.noTran(noTransfer))}
+              onChange={() => console.log(dispatch(action.noTran(noTransfer)))}
               checked={noTransfer}
               id="no-transfers"
               name="noTransfers"
@@ -99,7 +99,14 @@ const Filter = () => {
 };
 
 const mapStateToProps = (state) => {
-  return state.ticketsReducer;
+  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = state.ticketsReducer;
+  return {
+    allTicket: allTicket,
+    noTransfer: noTransfer,
+    oneTransfer: oneTransfer,
+    twoTransfer: twoTransfer,
+    threeTransfer: threeTransfer,
+  };
 };
 
 export default connect(mapStateToProps, store)(Filter);

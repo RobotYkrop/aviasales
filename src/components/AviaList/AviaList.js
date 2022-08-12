@@ -4,7 +4,6 @@ import uuid from 'react-uuid';
 import { useCallback } from 'react';
 
 import { showMoreTicket } from '../../store/actions';
-import { fetchSearchId } from '../AviaApi/AviaApi';
 import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
 import { mapDuration } from '../utilites/convertNum';
@@ -20,7 +19,7 @@ const AviaList = () => {
     oneTransfer,
     twoTransfer,
     threeTransfer,
-    listTickets,
+    tickets,
     numShowTicket,
     listStops,
     sortPrice,
@@ -40,23 +39,8 @@ const AviaList = () => {
     state.ticketsReducer.sortSpeed,
     state.ticketsReducer.sortOptimal,
   ]);
-  console.log(listTickets);
-  const filteredAndSorted = useCallback((arrTicket) => {
-    // Сделал сортировку по дефолту, но если не надо ее, то могу убрать
-    // switch (listTickets) {
-    //   case sortPrice:
-    //     listTickets.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-    //     break;
-    //   case sortSpeed:
-    //     listTickets.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-    //     break;
-    //   case sortOptimal:
-    //     listTickets.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-    //     break;
 
-    //   default:
-    //     break;
-    // }
+  const filteredAndSorted = useCallback((arrTicket) => {
     if (sortPrice) {
       return arrTicket.sort((prev, next) => (prev.price > next.price ? 1 : -1));
     } else if (sortSpeed) {
@@ -79,9 +63,8 @@ const AviaList = () => {
     });
   });
 
-  const arr = filteredAndSorted(listTickets);
-
-  dispatch(fetchSearchId());
+  const arr = filteredAndSorted(tickets);
+  console.log(arr);
   return (
     <div>
       {!listStops && !isError && (
@@ -105,7 +88,10 @@ const AviaList = () => {
 };
 
 const mapStateToProps = (state) => {
-  return { ...state.ticketsReducer };
+  const { tickets } = state.ticketsReducer;
+  return {
+    tickets: tickets,
+  };
 };
 
 export default connect(mapStateToProps, store)(AviaList);
