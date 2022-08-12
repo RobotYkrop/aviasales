@@ -1,10 +1,9 @@
 import { Spin, Alert } from 'antd';
-import { useSelector, useDispatch, connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import uuid from 'react-uuid';
 import { useCallback } from 'react';
 
 import { showMoreTicket } from '../../store/actions';
-import * as store from '../../store/store';
 import AviaItem from '../AviaItem/AviaItem';
 import { mapDuration } from '../utilites/convertNum';
 
@@ -40,14 +39,7 @@ const AviaList = () => {
     state.ticketsReducer.sortOptimal,
   ]);
 
-  const filteredAndSorted = useCallback((arrTicket) => {
-    if (sortPrice) {
-      return arrTicket.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-    } else if (sortSpeed) {
-      return arrTicket.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-    } else if (sortOptimal) {
-      return arrTicket.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-    }
+  const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
       if (allTicket) {
         return currentValue;
@@ -63,7 +55,17 @@ const AviaList = () => {
     });
   });
 
-  const arr = filteredAndSorted(tickets);
+  const sorted = useCallback((arrTicket) => {
+    if (sortPrice) {
+      return arrTicket.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+    } else if (sortSpeed) {
+      return arrTicket.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+    } else if (sortOptimal) {
+      return arrTicket.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+    }
+  });
+
+  const arr = filtered(sorted(tickets));
   console.log(arr);
   return (
     <div>
@@ -87,11 +89,4 @@ const AviaList = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { tickets } = state.ticketsReducer;
-  return {
-    tickets: tickets,
-  };
-};
-
-export default connect(mapStateToProps, store)(AviaList);
+export default AviaList;

@@ -1,7 +1,6 @@
-import { useDispatch, connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lowPrice, optimale, speedAvia } from '../../store/actions';
-import { store } from '../../store/store';
 
 import tabs from './tabs.module.scss';
 
@@ -27,8 +26,4 @@ const Header = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state.ticketsReducer;
-};
-
-export default connect(mapStateToProps, store)(Header);
+export default Header;

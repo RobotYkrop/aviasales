@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import * as action from '../../store/actions';
-import * as store from '../../store/store';
 
 import classes from './Filter.module.scss';
 
@@ -98,15 +97,4 @@ const Filter = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = state.ticketsReducer;
-  return {
-    allTicket: allTicket,
-    noTransfer: noTransfer,
-    oneTransfer: oneTransfer,
-    twoTransfer: twoTransfer,
-    threeTransfer: threeTransfer,
-  };
-};
-
-export default connect(mapStateToProps, store)(Filter);
+export default Filter;
