@@ -16,3 +16,4 @@ export const speedAvia = (payload) => ({ type: 'SPEED_AVIA_CASE', payload });
 export const optimale = (payload) => ({ type: 'OPTIMAL', payload });
 // Actions для ошибки
 export const setError = (payload) => ({ type: 'SET_ERROR', payload });
+export const setErrorEnternet = (payload) => ({ type: 'SET_ERROR_ENTERNET', payload });

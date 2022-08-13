@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { setError, stop, tickets } from '../../store/actions';
+import { setError, setErrorEnternet, stop, tickets } from '../../store/actions';
 
 export const fetchSearchId = () => async (dispatch) => {
   const [searchId, setSearchId] = useState();
@@ -19,23 +19,27 @@ export const fetchSearchId = () => async (dispatch) => {
     if (searchId) {
       try {
         const subscribe = async () => {
-          let res = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
-          if (res.status === 502 || res.status === 500) {
-            await subscribe();
-          } else if (res.status !== 200) {
-            dispatch(setError(true));
-          } else {
-            let part = await res.json();
-            dispatch(tickets(part));
-            dispatch(stop(part.stop));
-            if (!part.stop) {
+          try {
+            let res = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
+            if (res.status === 502 || res.status === 500) {
               await subscribe();
+            } else if (res.status !== 200) {
+              dispatch(setError(true));
+            } else {
+              let part = await res.json();
+              dispatch(tickets(part));
+              dispatch(stop(part.stop));
+              if (!part.stop) {
+                await subscribe();
+              }
             }
+          } catch (e) {
+            dispatch(setErrorEnternet(true));
           }
         };
         subscribe();
       } catch (e) {
-        throw new Error(e.message);
+        dispatch(setError(true));
       }
     }
   }, [searchId]);

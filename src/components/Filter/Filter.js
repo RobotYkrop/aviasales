@@ -32,7 +32,7 @@ const Filter = () => {
               className={classes['custom-checkbox']}
             />
             <label htmlFor="all" className={classes['text-style']}>
-              Все
+              <span>Все</span>
             </label>
           </li>
           <li className={classes['filters-item']}>
@@ -45,7 +45,7 @@ const Filter = () => {
               className={classes['custom-checkbox']}
             />
             <label htmlFor="no-transfers" className={classes['text-style']}>
-              Без пересадок
+              <span>Без пересадок</span>
             </label>
           </li>
           <li className={classes['filters-item']}>
@@ -58,7 +58,7 @@ const Filter = () => {
               className={classes['custom-checkbox']}
             />
             <label htmlFor="1-transfers" className={classes['text-style']}>
-              1 пересадка
+              <span>1 пересадка</span>
             </label>
           </li>
           <li className={classes['filters-item']}>
@@ -71,7 +71,7 @@ const Filter = () => {
               className={classes['custom-checkbox']}
             />
             <label htmlFor="2-transfers" className={classes['text-style']}>
-              2 пересадка
+              <span>2 пересадка</span>
             </label>
           </li>
           <li className={classes['filters-item']}>
@@ -84,7 +84,7 @@ const Filter = () => {
               className={classes['custom-checkbox']}
             />
             <label htmlFor="3-transfers" className={classes['text-style']}>
-              3 пересадки
+              <span>3 пересадки</span>
             </label>
           </li>
         </ul>

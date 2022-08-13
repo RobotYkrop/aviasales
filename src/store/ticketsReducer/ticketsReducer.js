@@ -1,7 +1,6 @@
 export const defaultState = {
   tickets: [],
   numShowTicket: 5,
-  isError: false,
   stop: false,
   allTicket: true,
   noTransfer: true,
@@ -86,8 +85,6 @@ export const ticketsReducer = (state = defaultState, action) => {
       return { ...state, allTicket: true };
     case 'ALL_TICKET_FALSE':
       return { ...state, allTicket: false };
-    case 'SET_ERROR':
-      return { ...state, isError: action.payload };
     default:
       return state;
   }

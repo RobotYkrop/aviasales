@@ -1,7 +1,6 @@
 import { Spin, Alert } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import uuid from 'react-uuid';
 import { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
 import AviaItem from '../AviaItem/AviaItem';
@@ -12,7 +11,6 @@ import list from './AviaList.module.scss';
 const AviaList = () => {
   const dispatch = useDispatch();
   const {
-    isError,
     allTicket,
     noTransfer,
     oneTransfer,
@@ -25,6 +23,9 @@ const AviaList = () => {
     sortSpeed,
     sortOptimal,
   } = useSelector((state) => state.ticketsReducer);
+  const { isError, isErrorEnternet } = useSelector((state) => state.errorsReducer);
+
+  console.log(sortPrice, sortSpeed, sortOptimal);
 
   const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
@@ -42,13 +43,16 @@ const AviaList = () => {
     });
   });
 
-  const sorted = useCallback((arrTicket) => {
+  const sorted = useCallback((arr) => {
     if (sortPrice) {
-      return arrTicket.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+      return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
     } else if (sortSpeed) {
-      return arrTicket.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+      return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
     } else if (sortOptimal) {
-      return arrTicket.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+      return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+    }
+    if (!sortPrice && !sortPrice && !sortOptimal) {
+      return arr;
     }
   });
 
@@ -56,15 +60,22 @@ const AviaList = () => {
   console.log(arr);
   return (
     <div>
-      {!stop && !isError && (
+      {!stop && !isError && !isErrorEnternet && (
         <div className={list['loader']}>
           <Spin tip="Loading..." />
         </div>
       )}
+      {isErrorEnternet && (
+        <Alert
+          message="Внимание!"
+          description="Возникла проблема с подключением к сети Интернет, проверьте подключение и попробуйте еще раз"
+          type="info"
+        />
+      )}
       {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
       <div className={list['list_ticket']}>
-        {arr.slice(0, numShowTicket).map((item) => {
-          return <AviaItem {...item} key={uuid()} />;
+        {arr.slice(0, numShowTicket).map((item, i) => {
+          return <AviaItem {...item} key={i} />;
         })}
         {arr.length >= numShowTicket && (
           <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
