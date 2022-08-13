@@ -11,7 +11,7 @@ import list from './AviaList.module.scss';
 
 const AviaList = () => {
   const dispatch = useDispatch();
-  const [
+  const {
     isError,
     allTicket,
     noTransfer,
@@ -20,24 +20,11 @@ const AviaList = () => {
     threeTransfer,
     tickets,
     numShowTicket,
-    listStops,
+    stop,
     sortPrice,
     sortSpeed,
     sortOptimal,
-  ] = useSelector((state) => [
-    state.ticketsReducer.isError,
-    state.ticketsReducer.allTicket,
-    state.ticketsReducer.noTransfer,
-    state.ticketsReducer.oneTransfer,
-    state.ticketsReducer.twoTransfer,
-    state.ticketsReducer.threeTransfer,
-    state.ticketsReducer.tickets,
-    state.ticketsReducer.numShowTicket,
-    state.ticketsReducer.stop,
-    state.ticketsReducer.sortPrice,
-    state.ticketsReducer.sortSpeed,
-    state.ticketsReducer.sortOptimal,
-  ]);
+  } = useSelector((state) => state.ticketsReducer);
 
   const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
@@ -69,7 +56,7 @@ const AviaList = () => {
   console.log(arr);
   return (
     <div>
-      {!listStops && !isError && (
+      {!stop && !isError && (
         <div className={list['loader']}>
           <Spin tip="Loading..." />
         </div>

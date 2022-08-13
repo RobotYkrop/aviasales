@@ -1,6 +1,5 @@
 export const defaultState = {
   tickets: [],
-  arrFilter: [],
   numShowTicket: 5,
   isError: false,
   stop: false,
@@ -39,7 +38,6 @@ export const ticketsReducer = (state = defaultState, action) => {
         sortPrice: !state.sortPrice,
         sortSpeed: false,
         sortOptimal: false,
-        // tickets: [...state.tickets.sort((prev, next) => (prev.price > next.price ? 1 : -1))],
       };
     case 'SPEED_AVIA_CASE':
       return {
@@ -47,7 +45,6 @@ export const ticketsReducer = (state = defaultState, action) => {
         sortSpeed: !state.sortSpeed,
         sortPrice: false,
         sortOptimal: false,
-        // tickets: [...state.tickets.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1))],
       };
     case 'OPTIMAL':
       return {
@@ -55,11 +52,6 @@ export const ticketsReducer = (state = defaultState, action) => {
         sortOptimal: !state.sortOptimal,
         sortSpeed: false,
         sortPrice: false,
-        // tickets: [
-        //   ...state.tickets.sort((prev, next) =>
-        //     mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1
-        //   ),
-        // ],
       };
     case 'ALL_TRANSFERS_CASE':
       return {

@@ -8,13 +8,9 @@ import classes from './Filter.module.scss';
 const Filter = () => {
   const dispatch = useDispatch();
 
-  const [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer] = useSelector((state) => [
-    state.ticketsReducer.allTicket,
-    state.ticketsReducer.noTransfer,
-    state.ticketsReducer.oneTransfer,
-    state.ticketsReducer.twoTransfer,
-    state.ticketsReducer.threeTransfer,
-  ]);
+  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
+    (state) => state.ticketsReducer
+  );
 
   useEffect(() => {
     noTransfer && oneTransfer && twoTransfer && threeTransfer

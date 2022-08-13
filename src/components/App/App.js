@@ -12,13 +12,9 @@ import classes from './App.module.scss';
 
 const App = () => {
   const dispatch = useDispatch();
-  const [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer] = useSelector((state) => [
-    state.ticketsReducer.allTicket,
-    state.ticketsReducer.noTransfer,
-    state.ticketsReducer.oneTransfer,
-    state.ticketsReducer.twoTransfer,
-    state.ticketsReducer.threeTransfer,
-  ]);
+  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
+    (state) => state.ticketsReducer
+  );
   dispatch(fetchSearchId());
   const notFound =
     allTicket === false &&

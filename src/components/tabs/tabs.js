@@ -5,12 +5,9 @@ import { lowPrice, optimale, speedAvia } from '../../store/actions';
 import tabs from './tabs.module.scss';
 
 const Header = () => {
-  const [sortPrice, sortSpeed, sortOptimal] = useSelector((state) => [
-    state.ticketsReducer.sortPrice,
-    state.ticketsReducer.sortSpeed,
-    state.ticketsReducer.sortOptimal,
-  ]);
+  const { sortPrice, sortSpeed, sortOptimal } = useSelector((state) => state.ticketsReducer);
   const dispatch = useDispatch();
+
   return (
     <section className={tabs.tabs}>
       <button onClick={() => dispatch(lowPrice(sortPrice))} className={sortPrice ? tabs['active'] : tabs['']}>
