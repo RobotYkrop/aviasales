@@ -1,14 +1,14 @@
 import { Spin, Alert } from 'antd';
-import { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
-import AviaItem from '../AviaItem/AviaItem';
+import { AviaItem } from '../AviaItem/AviaItem';
 import { mapDuration } from '../utilites/convertNum';
 
 import list from './AviaList.module.scss';
 
-const AviaList = () => {
+const AviaList = React.memo(function Avia({ tickets }) {
   const dispatch = useDispatch();
   const {
     allTicket,
@@ -16,7 +16,6 @@ const AviaList = () => {
     oneTransfer,
     twoTransfer,
     threeTransfer,
-    tickets,
     numShowTicket,
     stop,
     sortPrice,
@@ -24,8 +23,6 @@ const AviaList = () => {
     sortOptimal,
   } = useSelector((state) => state.ticketsReducer);
   const { isError, isErrorEnternet } = useSelector((state) => state.errorsReducer);
-
-  console.log(sortPrice, sortSpeed, sortOptimal);
 
   const filtered = useCallback((arrTicket) => {
     return arrTicket.filter((currentValue) => {
@@ -43,20 +40,23 @@ const AviaList = () => {
     });
   });
 
-  const sorted = useCallback((arr) => {
-    if (sortPrice) {
-      return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-    } else if (sortSpeed) {
-      return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-    } else if (sortOptimal) {
-      return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-    }
-    if (!sortPrice && !sortPrice && !sortOptimal) {
-      return arr;
-    }
-  });
+  const sorted = useCallback(
+    (arr) => {
+      if (sortPrice) {
+        return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+      } else if (sortSpeed) {
+        return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+      } else if (sortOptimal) {
+        return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+      }
+      if (!sortPrice && !sortPrice && !sortOptimal) {
+        return arr;
+      }
+    },
+    [sortPrice, sortOptimal, sortSpeed]
+  );
 
-  const arr = filtered(sorted(tickets));
+  const arr = useMemo(() => filtered(sorted(tickets)));
   console.log(arr);
   return (
     <div>
@@ -74,9 +74,14 @@ const AviaList = () => {
       )}
       {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
       <div className={list['list_ticket']}>
-        {arr.slice(0, numShowTicket).map((item, i) => {
-          return <AviaItem {...item} key={i} />;
-        })}
+        {arr.slice(0, numShowTicket).map(
+          useCallback(
+            (item, i) => {
+              return <AviaItem {...item} key={i} />;
+            },
+            [arr]
+          )
+        )}
         {arr.length >= numShowTicket && (
           <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
             Показать еще 5 билетов!
@@ -85,6 +90,6 @@ const AviaList = () => {
       </div>
     </div>
   );
-};
+});
 
 export default AviaList;

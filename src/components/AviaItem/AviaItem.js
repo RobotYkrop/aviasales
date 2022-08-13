@@ -1,3 +1,4 @@
+import React from 'react';
 import uuid from 'react-uuid';
 
 import { convertDate, getTravelTime } from '../utilites/convertDate';
@@ -5,7 +6,7 @@ import { enumerate } from '../utilites/convertNum';
 
 import items from './AviaItems.module.scss';
 
-const AviaItem = ({ price, carrier, segments }) => {
+export const AviaItem = React.memo(function Avia({ price, carrier, segments }) {
   return (
     <ul className={items['list_avia_ticket']}>
       <div className={items['price_logo']}>
@@ -32,5 +33,5 @@ const AviaItem = ({ price, carrier, segments }) => {
       })}
     </ul>
   );
-};
+});
 export default AviaItem;

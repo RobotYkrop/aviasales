@@ -12,7 +12,7 @@ import classes from './App.module.scss';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
+  const { tickets, allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
     (state) => state.ticketsReducer
   );
   dispatch(fetchSearchId());
@@ -24,7 +24,7 @@ const App = () => {
     threeTransfer === false ? (
       <Empty description="Рейсов, подходящих под заданные фильтры, не найдено" />
     ) : (
-      <AviaList />
+      <AviaList tickets={tickets} />
     );
   return (
     <div className={classes.App}>
