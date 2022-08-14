@@ -42,15 +42,15 @@ const AviaList = React.memo(function Avia({ tickets }) {
 
   const sorted = useCallback(
     (arr) => {
-      if (!sortPrice && !sortPrice && !sortOptimal) {
-        return arr;
-      }
       if (sortPrice) {
         return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
       } else if (sortSpeed) {
         return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
       } else if (sortOptimal) {
         return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+      }
+      if (!sortPrice && !sortPrice && !sortOptimal) {
+        return arr;
       }
     },
     [sortPrice, sortOptimal, sortSpeed]
