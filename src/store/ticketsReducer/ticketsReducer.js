@@ -7,7 +7,7 @@ export const defaultState = {
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
-  sortPrice: true,
+  sortPrice: false,
   sortOptimal: false,
   sortSpeed: false,
 };
