@@ -19,11 +19,6 @@ export const ticketsReducer = (state = defaultState, action) => {
         ...state,
         tickets: [...state.tickets, ...action.payload.tickets],
       };
-    case 'FILTER_TICKETS':
-      return {
-        ...state,
-        arrFilter: [...state.tickets],
-      };
     case 'LIST_STOPS':
       return {
         ...state,
