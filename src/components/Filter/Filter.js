@@ -37,7 +37,7 @@ const Filter = () => {
           </li>
           <li className={classes['filters-item']}>
             <input
-              onChange={() => console.log(dispatch(action.noTran(noTransfer)))}
+              onChange={() => dispatch(action.noTran(noTransfer))}
               checked={noTransfer}
               id="no-transfers"
               name="noTransfers"
