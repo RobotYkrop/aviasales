@@ -5,7 +5,7 @@ import * as action from '../../store/actions';
 
 import classes from './Filter.module.scss';
 
-const Filter = () => {
+const Filter = React.memo(function Filter() {
   const dispatch = useDispatch();
 
   const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
@@ -91,6 +91,6 @@ const Filter = () => {
       </form>
     </section>
   );
-};
+});
 
 export default Filter;

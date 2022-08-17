@@ -1,5 +1,5 @@
 import { Spin, Alert } from 'antd';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
@@ -25,7 +25,7 @@ const AviaList = () => {
   } = useSelector((state) => state.ticketsReducer);
   const { isError, isErrorEnternet } = useSelector((state) => state.errorsReducer);
 
-  const filtered = useCallback((arrTicket) => {
+  const filtered = (arrTicket) => {
     return arrTicket.filter((currentValue) => {
       if (allTicket) {
         return currentValue;
@@ -39,9 +39,9 @@ const AviaList = () => {
         return true;
       return false;
     });
-  });
+  };
 
-  const sorted = useCallback((arr) => {
+  const sorted = (arr) => {
     if (sortPrice) {
       return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
     } else if (sortSpeed) {
@@ -52,9 +52,10 @@ const AviaList = () => {
     if (!sortPrice && !sortPrice && !sortOptimal) {
       return arr;
     }
-  });
+  };
 
-  const arr = useCallback(filtered(sorted(tickets)));
+  const arr = filtered(sorted(tickets));
+
   console.log(arr);
   return (
     <div>
@@ -72,14 +73,9 @@ const AviaList = () => {
       )}
       {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
       <div className={list['list_ticket']}>
-        {arr.slice(0, numShowTicket).map(
-          useCallback(
-            (item, i) => {
-              return <AviaItem {...item} key={i} />;
-            },
-            [arr]
-          )
-        )}
+        {arr.slice(0, numShowTicket).map((item, i) => {
+          return <AviaItem {...item} key={i} />;
+        })}
         {arr.length >= numShowTicket && (
           <button type="button" className={list['showMoreTicket']} onClick={() => dispatch(showMoreTicket())}>
             Показать еще 5 билетов!

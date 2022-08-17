@@ -6,7 +6,7 @@ import { enumerate } from '../utilites/convertNum';
 
 import items from './AviaItems.module.scss';
 
-export const AviaItem = React.memo(function Avia({ price, carrier, segments }) {
+export const AviaItem = ({ price, carrier, segments }) => {
   return (
     <ul className={items['list_avia_ticket']}>
       <div className={items['price_logo']}>
@@ -33,5 +33,5 @@ export const AviaItem = React.memo(function Avia({ price, carrier, segments }) {
       })}
     </ul>
   );
-});
+};
 export default AviaItem;

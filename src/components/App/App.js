@@ -1,5 +1,6 @@
 import { Empty } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 import Filter from '../Filter/Filter';
 import Header from '../tabs/tabs';
