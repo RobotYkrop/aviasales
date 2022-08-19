@@ -1,5 +1,5 @@
 import { Spin, Alert } from 'antd';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
@@ -9,8 +9,9 @@ import * as selectors from '../../store/selectors';
 
 import list from './AviaList.module.scss';
 
-const AviaList = () => {
+const AviaList = React.memo(function AviaList() {
   const dispatch = useDispatch();
+
   const allTicket = useSelector(selectors.allTicket);
   const noTransfer = useSelector(selectors.noTransfer);
   const oneTransfer = useSelector(selectors.oneTransfer);
@@ -26,34 +27,38 @@ const AviaList = () => {
   const isErrorEnternet = useSelector(selectors.isErrorEnternet);
   const isError = useSelector(selectors.isError);
 
-  const filtered = (arrTicket) => {
-    return arrTicket.filter((currentValue) => {
-      if (allTicket) {
-        return currentValue;
-      }
-      if (
-        (noTransfer && currentValue.segments[0].stops.length === 0 && currentValue.segments[1].stops.length === 0) ||
-        (oneTransfer && currentValue.segments[0].stops.length === 1 && currentValue.segments[1].stops.length === 1) ||
-        (twoTransfer && currentValue.segments[0].stops.length === 2 && currentValue.segments[1].stops.length === 2) ||
-        (threeTransfer && currentValue.segments[0].stops.length === 3 && currentValue.segments[1].stops.length === 3)
-      )
-        return true;
-      return false;
-    });
-  };
+  const filtered = useCallback(
+    (arrTicket) => {
+      return arrTicket.filter((currentValue) => {
+        if (allTicket) {
+          return currentValue;
+        }
+        if (
+          (noTransfer && currentValue.segments[0].stops.length === 0 && currentValue.segments[1].stops.length === 0) ||
+          (oneTransfer && currentValue.segments[0].stops.length === 1 && currentValue.segments[1].stops.length === 1) ||
+          (twoTransfer && currentValue.segments[0].stops.length === 2 && currentValue.segments[1].stops.length === 2) ||
+          (threeTransfer && currentValue.segments[0].stops.length === 3 && currentValue.segments[1].stops.length === 3)
+        )
+          return true;
+        return false;
+      });
+    },
+    [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer]
+  );
 
-  const sorted = (arr) => {
-    if (sortPrice) {
-      return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-    } else if (sortSpeed) {
-      return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-    } else if (sortOptimal) {
-      return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-    }
-    if (!sortPrice && !sortPrice && !sortOptimal) {
+  const sorted = useCallback(
+    (arr) => {
+      if (sortPrice) {
+        return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+      } else if (sortSpeed) {
+        return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+      } else if (sortOptimal) {
+        return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+      }
       return arr;
-    }
-  };
+    },
+    [sortPrice, sortOptimal, sortSpeed]
+  );
 
   const arr = filtered(sorted(tickets));
 
@@ -85,6 +90,6 @@ const AviaList = () => {
       </div>
     </div>
   );
-};
+});
 
 export default AviaList;
