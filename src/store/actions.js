@@ -6,6 +6,7 @@ export const threeTran = (payload) => ({ type: 'THREE_TRANSFERS_CASE', payload }
 export const allTick = (payload) => ({ type: 'ALL_TRANSFERS_CASE', payload });
 export const ticketTrue = (payload) => ({ type: 'ALL_TICKET_TRUE', payload });
 export const ticketFalse = (payload) => ({ type: 'ALL_TICKET_FALSE', payload });
+export const searchId = (payload) => ({ type: 'FETCH_SEARCH_ID', payload });
 // Actions для массива билетов
 export const tickets = (payload) => ({ type: 'LIST_TICKETS', payload });
 export const stop = (payload) => ({ type: 'LIST_STOPS', payload });

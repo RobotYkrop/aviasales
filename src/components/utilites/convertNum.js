@@ -4,7 +4,7 @@ export const mapDuration = (ticket) =>
 export const enumerate = (val) => {
   switch (val) {
     case 1:
-      return 'ПЕРЕСАДКА';
+      return '1 ПЕРЕСАДКА';
     case 2:
       return '2 ПЕРЕСАДКИ';
     case 3:

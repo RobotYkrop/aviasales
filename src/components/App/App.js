@@ -7,15 +7,18 @@ import Header from '../tabs/tabs';
 import logo from '../assets/Logo.svg';
 import { fetchSearchId } from '../AviaApi/AviaApi';
 import AviaList from '../AviaList/AviaList';
+import * as selectors from '../../store/selectors';
 
 import 'antd/dist/antd.min.css';
 import classes from './App.module.scss';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
-    (state) => state.ticketsReducer
-  );
+  const allTicket = useSelector(selectors.allTicket);
+  const noTransfer = useSelector(selectors.noTransfer);
+  const oneTransfer = useSelector(selectors.oneTransfer);
+  const twoTransfer = useSelector(selectors.twoTransfer);
+  const threeTransfer = useSelector(selectors.threeTransfer);
   dispatch(fetchSearchId());
   const notFound =
     allTicket === false &&

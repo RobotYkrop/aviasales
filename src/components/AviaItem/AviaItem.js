@@ -15,18 +15,15 @@ export const AviaItem = ({ price, carrier, segments }) => {
       </div>
       {segments.map((item) => {
         const { date, origin, duration, stops, destination } = item;
-        let CONVERT_DATE = convertDate(date);
-        let CONVERT_TRAVEL_TIME = getTravelTime(duration);
-        let stop = enumerate(stops.length);
         return (
           <ul className={items['segments']} key={uuid()}>
             <li className={items['text']}>
               {origin} - {destination}
             </li>
             <li className={items['text']}>В ПУТИ</li>
-            <li className={items['text']}>{stop}</li>
-            <li className={items['time-text']}>{CONVERT_DATE}</li>
-            <li className={items['time-text']}>{CONVERT_TRAVEL_TIME}</li>
+            <li className={items['text']}>{enumerate(stops.length)}</li>
+            <li className={items['time-text']}>{convertDate(date)}</li>
+            <li className={items['time-text']}>{getTravelTime(duration)}</li>
             <li className={items['time-text']}>{stops.map((item) => item).join(' ')}</li>
           </ul>
         );

@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as action from '../../store/actions';
+import * as selectors from '../../store/selectors';
 
 import classes from './Filter.module.scss';
 
-const Filter = React.memo(function Filter() {
+const Filter = () => {
   const dispatch = useDispatch();
-
-  const { allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer } = useSelector(
-    (state) => state.ticketsReducer
-  );
+  const allTicket = useSelector(selectors.allTicket);
+  const noTransfer = useSelector(selectors.noTransfer);
+  const oneTransfer = useSelector(selectors.oneTransfer);
+  const twoTransfer = useSelector(selectors.twoTransfer);
+  const threeTransfer = useSelector(selectors.threeTransfer);
 
   useEffect(() => {
     noTransfer && oneTransfer && twoTransfer && threeTransfer
@@ -91,6 +93,6 @@ const Filter = React.memo(function Filter() {
       </form>
     </section>
   );
-});
+};
 
 export default Filter;

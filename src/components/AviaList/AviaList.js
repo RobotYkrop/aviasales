@@ -5,25 +5,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showMoreTicket } from '../../store/actions';
 import { AviaItem } from '../AviaItem/AviaItem';
 import { mapDuration } from '../utilites/convertNum';
+import * as selectors from '../../store/selectors';
 
 import list from './AviaList.module.scss';
 
 const AviaList = () => {
   const dispatch = useDispatch();
-  const {
-    allTicket,
-    noTransfer,
-    oneTransfer,
-    twoTransfer,
-    threeTransfer,
-    numShowTicket,
-    stop,
-    tickets,
-    sortPrice,
-    sortSpeed,
-    sortOptimal,
-  } = useSelector((state) => state.ticketsReducer);
-  const { isError, isErrorEnternet } = useSelector((state) => state.errorsReducer);
+  const allTicket = useSelector(selectors.allTicket);
+  const noTransfer = useSelector(selectors.noTransfer);
+  const oneTransfer = useSelector(selectors.oneTransfer);
+  const twoTransfer = useSelector(selectors.twoTransfer);
+  const threeTransfer = useSelector(selectors.threeTransfer);
+  const numShowTicket = useSelector(selectors.numShowTicket);
+  const stop = useSelector(selectors.stop);
+  const tickets = useSelector(selectors.tickets);
+  const sortPrice = useSelector(selectors.sortPrice);
+  const sortSpeed = useSelector(selectors.sortSpeed);
+  const sortOptimal = useSelector(selectors.sortOptimal);
+
+  const isErrorEnternet = useSelector(selectors.isErrorEnternet);
+  const isError = useSelector(selectors.isError);
 
   const filtered = (arrTicket) => {
     return arrTicket.filter((currentValue) => {
@@ -67,7 +68,7 @@ const AviaList = () => {
       {isErrorEnternet && (
         <Alert
           message="Внимание!"
-          description="Возникла проблема с подключением к сети Интернет, проверьте подключение и попробуйте еще раз"
+          description="Возникла проблема с подключением к сети Интернет, проверьте подключение и попробуйте еще раз."
           type="info"
         />
       )}

@@ -7,13 +7,19 @@ export const defaultState = {
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
-  sortPrice: false,
-  sortOptimal: false,
-  sortSpeed: false,
+  sortPrice: null,
+  sortOptimal: null,
+  sortSpeed: null,
+  searchId: null,
 };
 
 export const ticketsReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case 'FETCH_SEARCH_ID':
+      return {
+        ...state,
+        searchId: action.payload,
+      };
     case 'LIST_TICKETS':
       return {
         ...state,
@@ -29,23 +35,23 @@ export const ticketsReducer = (state = defaultState, action) => {
     case 'LOW_PRICE_CASE':
       return {
         ...state,
-        sortPrice: !state.sortPrice,
-        sortSpeed: false,
-        sortOptimal: false,
+        sortPrice: [...state.tickets],
+        sortSpeed: null,
+        sortOptimal: null,
       };
     case 'SPEED_AVIA_CASE':
       return {
         ...state,
-        sortSpeed: !state.sortSpeed,
-        sortPrice: false,
-        sortOptimal: false,
+        sortSpeed: [...state.tickets],
+        sortPrice: null,
+        sortOptimal: null,
       };
     case 'OPTIMAL':
       return {
         ...state,
-        sortOptimal: !state.sortOptimal,
-        sortSpeed: false,
-        sortPrice: false,
+        sortOptimal: [...state.tickets],
+        sortSpeed: null,
+        sortPrice: null,
       };
     case 'ALL_TRANSFERS_CASE':
       return {
