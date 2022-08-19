@@ -6,18 +6,18 @@ import * as selectors from '../../store/selectors';
 
 const fetchSearch = () => async (dispatch) => {
   try {
-    fetch('https://aviasales-test-api.kata.academy/search')
+    await fetch('https://aviasales-test-api.kata.academy/search')
       .then((res) => res.json())
       .then((res) => dispatch(searchId(res.searchId)));
   } catch (e) {
-    throw new Error(e.message);
+    dispatch(setError(true));
   }
 };
 
 export const fetchSearchId = () => async (dispatch) => {
   useEffect(() => {
     dispatch(fetchSearch());
-  }, []);
+  }, [dispatch]);
   const search = useSelector(selectors.search);
   if (search) {
     try {

@@ -71,13 +71,9 @@ const AviaList = React.memo(function AviaList() {
         </div>
       )}
       {isErrorEnternet && (
-        <Alert
-          message="Внимание!"
-          description="Возникла проблема с подключением к сети Интернет, проверьте подключение и попробуйте еще раз."
-          type="info"
-        />
+        <Alert message="Внимание!" description="Возникла проблема с подключением к сети Интернет." type="info" />
       )}
-      {isError && <Alert message="Alert! Alert! Alert!" description="Problems...." type="info" />}
+      {isError && <Alert message="Alert! Alert! Alert!" description="Проблемы...одни проблемы..." type="info" />}
       <div className={list['list_ticket']}>
         {arr.slice(0, numShowTicket).map((item, i) => {
           return <AviaItem {...item} key={i} />;
