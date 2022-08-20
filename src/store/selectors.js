@@ -7,9 +7,6 @@ export const threeTransfer = (state) => state.ticketsReducer.threeTransfer;
 export const numShowTicket = (state) => state.ticketsReducer.numShowTicket;
 export const stop = (state) => state.ticketsReducer.stop;
 export const tickets = (state) => state.ticketsReducer.tickets;
-export const sortPrice = (state) => state.ticketsReducer.sortPrice;
-export const sortSpeed = (state) => state.ticketsReducer.sortSpeed;
-export const sortOptimal = (state) => state.ticketsReducer.sortOptimal;
 
 export const isError = (state) => state.errorsReducer.isError;
 export const isErrorEnternet = (state) => state.errorsReducer.isErrorEnternet;

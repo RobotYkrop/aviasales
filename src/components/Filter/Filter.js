@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as action from '../../store/actions';
@@ -14,7 +14,7 @@ const Filter = () => {
   const twoTransfer = useSelector(selectors.twoTransfer);
   const threeTransfer = useSelector(selectors.threeTransfer);
 
-  useMemo(() => {
+  useEffect(() => {
     noTransfer && oneTransfer && twoTransfer && threeTransfer
       ? dispatch(action.ticketTrue(allTicket))
       : dispatch(action.ticketFalse(allTicket));

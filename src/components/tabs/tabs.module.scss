@@ -2,11 +2,10 @@
 
 .tabs {
   display: flex;
-  & .active {
-    background-color: #2196f3;
-    color: #ffffff;
+  & input {
+    display: none;
   }
-  & button {
+  & input + label {
     color: #4a4a4a;
     background-color: #ffffff;
     display: flex;
@@ -21,14 +20,18 @@
     width: 100%;
     cursor: pointer;
   }
-  & button:first-child {
+  & input:checked + label {
+    background-color: #2196f3;
+    color: #ffffff;
+  }
+  & label:nth-child(2) {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right: none;
   }
-  & button:last-child {
-    border-left: none;
+  & label:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-left: none;
   }
 }

@@ -46,6 +46,7 @@
           z-index: -1;
           opacity: 0;
           & + label {
+            cursor: pointer;
             padding: 10px 10px 10px 20px;
             display: flex;
             align-items: stretch;

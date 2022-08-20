@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
 import { AviaItem } from '../AviaItem/AviaItem';
-import { mapDuration } from '../utilites/convertNum';
 import * as selectors from '../../store/selectors';
 
 import list from './AviaList.module.scss';
@@ -20,9 +19,6 @@ const AviaList = React.memo(function AviaList() {
   const numShowTicket = useSelector(selectors.numShowTicket);
   const stop = useSelector(selectors.stop);
   const tickets = useSelector(selectors.tickets);
-  const sortPrice = useSelector(selectors.sortPrice);
-  const sortSpeed = useSelector(selectors.sortSpeed);
-  const sortOptimal = useSelector(selectors.sortOptimal);
 
   const isErrorEnternet = useSelector(selectors.isErrorEnternet);
   const isError = useSelector(selectors.isError);
@@ -46,21 +42,21 @@ const AviaList = React.memo(function AviaList() {
     [allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer]
   );
 
-  const sorted = useCallback(
-    (arr) => {
-      if (sortPrice) {
-        return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-      } else if (sortSpeed) {
-        return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-      } else if (sortOptimal) {
-        return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-      }
-      return arr;
-    },
-    [sortPrice, sortOptimal, sortSpeed]
-  );
+  // const sorted = useCallback(
+  //   (arr) => {
+  //     if (sortPrice) {
+  //       return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+  //     } else if (sortSpeed) {
+  //       return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+  //     } else if (sortOptimal) {
+  //       return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+  //     }
+  //     return arr;
+  //   },
+  //   [sortPrice, sortOptimal, sortSpeed]
+  // );
 
-  const arr = filtered(sorted(tickets));
+  const arr = filtered(tickets);
 
   console.log(arr);
   return (
