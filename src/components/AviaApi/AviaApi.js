@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { searchId, setError, setErrorEnternet, stop, tickets } from '../../store/actions';
@@ -15,7 +15,7 @@ const fetchSearch = () => async (dispatch) => {
 };
 
 export const fetchSearchId = () => async (dispatch) => {
-  useEffect(() => {
+  useMemo(() => {
     dispatch(fetchSearch());
   }, [dispatch]);
   const search = useSelector(selectors.search);
