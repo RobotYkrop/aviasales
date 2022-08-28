@@ -18,7 +18,7 @@ const Filter = () => {
     noTransfer && oneTransfer && twoTransfer && threeTransfer
       ? dispatch(action.ticketTrue(allTicket))
       : dispatch(action.ticketFalse(allTicket));
-  }, [noTransfer, oneTransfer, twoTransfer, threeTransfer]);
+  }, [dispatch, allTicket, noTransfer, oneTransfer, twoTransfer, threeTransfer]);
   return (
     <section className={classes.filters}>
       <form className={classes['form']}>
