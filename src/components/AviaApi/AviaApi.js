@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { searchId, setError, setErrorEnternet, stop, tickets } from '../../store/actions';
@@ -15,10 +14,12 @@ const fetchSearch = () => async (dispatch) => {
 };
 
 export const fetchSearchId = () => async (dispatch) => {
-  useMemo(() => {
-    dispatch(fetchSearch());
-  }, [dispatch]);
   const search = useSelector(selectors.search);
+  console.log(search);
+  if (search === null) {
+    dispatch(fetchSearch());
+    return search;
+  }
   if (search) {
     try {
       const subscribe = async () => {
