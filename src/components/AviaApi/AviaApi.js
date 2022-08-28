@@ -15,10 +15,8 @@ const fetchSearch = () => async (dispatch) => {
 
 export const fetchSearchId = () => async (dispatch) => {
   const search = useSelector(selectors.search);
-  console.log(search);
   if (search === null) {
     dispatch(fetchSearch());
-    return search;
   }
   if (search) {
     try {
