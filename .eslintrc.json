@@ -23,7 +23,7 @@
     "ecmaVersion": 2022,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "import"],
+  "plugins": ["react", "prettier", "import", "react-hooks"],
   "rules": {
     "indent": "off",
     "prettier/prettier": [
@@ -32,6 +32,8 @@
         "endOfLine": "auto"
       }
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "semi": [2, "always"],
