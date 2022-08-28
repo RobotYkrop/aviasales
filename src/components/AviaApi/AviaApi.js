@@ -15,9 +15,7 @@ const fetchSearch = () => async (dispatch) => {
 
 export const fetchSearchId = () => async (dispatch) => {
   const search = useSelector(selectors.search);
-  if (search === null) {
-    dispatch(fetchSearch());
-  }
+  search ?? dispatch(fetchSearch());
   if (search) {
     try {
       const subscribe = async () => {
