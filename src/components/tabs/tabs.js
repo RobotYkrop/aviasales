@@ -18,13 +18,13 @@ const Header = () => {
       <label htmlFor="speed">Самый быстрый</label>
       <input id="optimale" name="sort" type="radio" onChange={() => dispatch(optimale())} />
       <label htmlFor="optimale">Оптимальный</label> */}
-      <button onClick={() => dispatch(lowPrice(sortPrice))} className={sortPrice ? tabs['active'] : tabs['']}>
+      <button onClick={() => dispatch(lowPrice())} className={sortPrice ? tabs['active'] : tabs['']}>
         Самый дешевый
       </button>
-      <button onClick={() => dispatch(speedAvia(sortSpeed))} className={sortSpeed ? tabs['active'] : tabs['']}>
+      <button onClick={() => dispatch(speedAvia())} className={sortSpeed ? tabs['active'] : tabs['']}>
         Самый быстрый
       </button>
-      <button onClick={() => dispatch(optimale(sortOptimal))} className={sortOptimal ? tabs['active'] : tabs['']}>
+      <button onClick={() => dispatch(optimale())} className={sortOptimal ? tabs['active'] : tabs['']}>
         Оптимальный
       </button>
     </section>

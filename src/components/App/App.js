@@ -32,7 +32,7 @@ const App = () => {
     );
   return (
     <div className={classes.App}>
-      <img src={logo} />
+      <img src={logo} alt={'logo'} />
       <div className={classes['container']}>
         <Filter />
         <section className={classes['content']}>
