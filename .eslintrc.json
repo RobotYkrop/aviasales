@@ -12,7 +12,8 @@
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:testing-library/react"
+    "plugin:testing-library/react",
+    "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
     "parser": " @babel/eslint-parser",
@@ -33,7 +34,7 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": ["warn"],
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "semi": [2, "always"],

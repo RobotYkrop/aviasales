@@ -1,4 +1,4 @@
-import { mapDuration } from '../../components/utilites/convertNum';
+// import { mapDuration } from '../../components/utilites/convertNum';
 
 export const defaultState = {
   tickets: [],
@@ -9,6 +9,11 @@ export const defaultState = {
   oneTransfer: true,
   twoTransfer: true,
   threeTransfer: true,
+  sortPrice: null,
+  sortOptimal: null,
+  sortSpeed: null,
+  isError: false,
+  isErrorEnternet: false,
   searchId: null,
 };
 
@@ -34,19 +39,28 @@ export const ticketsReducer = (state = defaultState, action) => {
     case 'LOW_PRICE_CASE':
       return {
         ...state,
-        tickets: state.tickets.slice().sort((prev, next) => (prev.price > next.price ? 1 : -1)),
+        sortPrice: [...state.tickets],
+        sortSpeed: null,
+        sortOptimal: null,
+        // tickets: [...state.tickets].sort((prev, next) => (prev.price > next.price ? 1 : -1)),
       };
     case 'SPEED_AVIA_CASE':
       return {
         ...state,
-        tickets: state.tickets.slice().sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1)),
+        sortSpeed: [...state.tickets],
+        sortPrice: null,
+        sortOptimal: null,
+        // tickets: [...state.tickets].sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1)),
       };
     case 'OPTIMAL':
       return {
         ...state,
-        tickets: state.tickets
-          .slice()
-          .sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1)),
+        sortOptimal: [...state.tickets],
+        sortSpeed: null,
+        sortPrice: null,
+        // tickets: [...state.tickets].sort((prev, next) =>
+        //   mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1
+        // ),
       };
     case 'ALL_TRANSFERS_CASE':
       return {
@@ -81,6 +95,10 @@ export const ticketsReducer = (state = defaultState, action) => {
       return { ...state, allTicket: true };
     case 'ALL_TICKET_FALSE':
       return { ...state, allTicket: false };
+    case 'SET_ERROR':
+      return { ...state, isError: action.payload };
+    case 'SET_ERROR_ENTERNET':
+      return { ...state, isErrorEnternet: action.payload };
     default:
       return state;
   }
