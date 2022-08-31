@@ -1,5 +1,5 @@
 import { Spin, Alert } from 'antd';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { showMoreTicket } from '../../store/actions';
@@ -44,19 +44,16 @@ const AviaList = () => {
     });
   };
 
-  const sorted = useCallback(
-    (arr) => {
-      if (sortPrice) {
-        return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
-      } else if (sortSpeed) {
-        return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
-      } else if (sortOptimal) {
-        return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
-      }
-      return arr;
-    },
-    [sortPrice, sortOptimal, sortSpeed]
-  );
+  const sorted = (arr) => {
+    if (sortPrice) {
+      return arr.sort((prev, next) => (prev.price > next.price ? 1 : -1));
+    } else if (sortSpeed) {
+      return arr.sort((prev, next) => (mapDuration(prev) > mapDuration(next) ? 1 : -1));
+    } else if (sortOptimal) {
+      return arr.sort((prev, next) => (mapDuration(prev) + prev.price > mapDuration(next) + next.price ? 1 : -1));
+    }
+    return arr;
+  };
 
   const arr = filtered(sorted(tickets));
 
