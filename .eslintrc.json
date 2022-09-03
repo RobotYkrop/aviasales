@@ -14,7 +14,10 @@
     "plugin:import/warnings",
     "plugin:testing-library/react",
     "plugin:react-hooks/recommended",
-    "react-app"
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/jsx-runtime",
+    "react-app",
+    "prettier"
   ],
   "parserOptions": {
     "parser": " @babel/eslint-parser",
@@ -35,7 +38,7 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "error",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "semi": [2, "always"],
